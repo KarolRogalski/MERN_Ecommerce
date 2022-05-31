@@ -1,7 +1,6 @@
 const data = {
   products: [
     {
-      _id: '1',
       name: 'House Fly',
       slug: 'house-fly',
       category: 'Flies',
@@ -14,7 +13,6 @@ const data = {
       description: 'common house fly',
     },
     {
-      _id: '2',
       name: 'Daddy Long Leg Spider',
       slug: 'daddy-long-leg-spider',
       category: 'Spiders',
@@ -27,7 +25,6 @@ const data = {
       description: 'high quality Daddy long legs spider',
     },
     {
-      _id: '3',
       name: 'Sun Beetle',
       slug: 'sun-beetle',
       category: 'Beetles',
@@ -40,7 +37,6 @@ const data = {
       description: 'nie sun beetle',
     },
     {
-      _id: '4',
       name: 'Mexican Redknee Tarantula',
       slug: 'mexican-redknee-tarantula',
       category: 'Spiders',
