@@ -84,7 +84,6 @@ export const OrderScreen = () => {
         dispatch({ type: 'PAY_SUCCESS', payload: data })
         toast.success('order is paid')
       } catch (err) {
-        console.log(err)
         dispatch({ type: 'PAY_FAIL', payload: getError(err) })
         toast.error(getError(err))
       }
@@ -120,7 +119,6 @@ export const OrderScreen = () => {
         const { data: clientId } = await axios.get('/api/keys/paypal', {
           headers: { authorization: `Bearer ${userInfo.token}` },
         })
-        console.log(options)
         paypalDispatch({
           type: 'resetOptions',
           value: {
@@ -129,7 +127,6 @@ export const OrderScreen = () => {
             currency: 'GBP',
           },
         })
-        console.log(options)
         paypalDispatch({ type: 'setLoadingStatus', value: 'pending' })
       }
       loadPaypalScript()
