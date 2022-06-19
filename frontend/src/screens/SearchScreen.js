@@ -245,7 +245,7 @@ export const SearchScreen = () => {
               <div>
                 {[...Array(pages).keys()].map((x) => (
                   <LinkContainer
-                    kex={x + 1}
+                    key={x + 1}
                     className='mx-1'
                     to={getFilterUrl({ page: x + 1 })}
                   >
