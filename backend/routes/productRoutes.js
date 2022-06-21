@@ -10,6 +10,28 @@ productRouter.get('/', async (req, res) => {
   res.send(products)
 })
 
+productRouter.post(
+  '/',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const newProduct = new Product({
+      name: 'sample name' + Date.now(),
+      slug: 'sample-name-' + Date.now(),
+      image: '/images/sun_beetles.jpg',
+      brand: 'sample brand',
+      category: 'sample category',
+      description: 'sample description',
+      price: 0,
+      countInStock: 0,
+      rating: 0,
+      numReviews: 0,
+    })
+    const product = await newProduct.save()
+    res.send({ message: 'Product Created', product })
+  })
+)
+
 const PAGE_SIZE = 3
 
 productRouter.get(
