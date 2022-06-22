@@ -14,21 +14,17 @@ uploadRouter.post(
   isAdmin,
   upload.single('file'),
   async (req, res) => {
-    console.log('req')
     cloudinary.config({
       cloud_name: process.env.CLOURINARY_CLOUD_NAME,
       api_key: process.env.CLOURINARY_API_KEY,
       api_secret: process.env.CLOURINARY_API_SECRET,
     })
     const streamUpload = (req) => {
-      console.log('first' + req)
       return new Promise((resolve, reject) => {
         const stream = cloudinary.uploader.upload_stream((error, result) => {
           if (result) {
-            console.log('result')
             resolve(result)
           } else {
-            console.log(error)
             reject(error)
           }
         })
