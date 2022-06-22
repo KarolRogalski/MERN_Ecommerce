@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useReducer } from 'react'
 import Button from 'react-bootstrap/Button'
 import { Helmet } from 'react-helmet-async'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import LoadingBox from '../components/LoadingBox'
 import MessageBox from '../components/MessageBox'
 import { Store } from '../Store'
@@ -59,6 +60,22 @@ export const UserListScreen = () => {
       fetchData()
     }
   }, [userInfo, successDelete])
+
+  const deleteHandler = async (user) => {
+    if (window.confirm('Are you sure to delete?')) {
+      try {
+        dispatch({ type: 'DELETE_REQUEST' })
+        await axios.delete(`/api/users/${user._id}`, {
+          headers: { authorization: `Bearer ${userInfo.token}` },
+        })
+        toast.success('User deleted successful')
+        dispatch({ type: 'DELETE_SUCCESS' })
+      } catch (err) {
+        toast.error(getError(err))
+        dispatch({ type: 'DELETE_FAIL' })
+      }
+    }
+  }
   return (
     <div>
       <Helmet>
@@ -95,6 +112,15 @@ export const UserListScreen = () => {
                     onClick={() => navigate(`/admin/user/${user._id}`)}
                   >
                     Edit
+                  </Button>
+                  &nbsp;
+                  <Button
+                    disabled={loadingDelete}
+                    type='button'
+                    variant='light'
+                    onClick={() => deleteHandler(user)}
+                  >
+                    Delete
                   </Button>
                 </td>
               </tr>
