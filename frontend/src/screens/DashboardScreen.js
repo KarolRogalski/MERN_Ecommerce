@@ -116,7 +116,9 @@ export const DashboardScreen = () => {
                 loader={<div>Loading Chart...</div>}
                 data={[
                   ['Date', 'Sales'],
-                  ...summary.dailyOrders.map((x) => [x._id, x.sales]),
+                  ...summary.dailyOrders
+                    .sort((a, b) => (a._id > b._id ? 1 : -1))
+                    .map((x) => [x._id, x.sales]),
                 ]}
               ></Chart>
             )}
@@ -133,7 +135,9 @@ export const DashboardScreen = () => {
                 loader={<div>Loading Chart...</div>}
                 data={[
                   ['Category', 'Products'],
-                  ...summary.productCategories.map((x) => [x._id, x.count]),
+                  ...summary.productCategories
+                    .sort((a, b) => (a._id > b._id ? 1 : -1))
+                    .map((x) => [x._id, x.count]),
                 ]}
               ></Chart>
             )}
