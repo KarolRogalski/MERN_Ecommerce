@@ -112,7 +112,6 @@ orderRouter.put(
       order.isDelivered = true
       order.deliveredAt = Date.now()
       await order.save()
-      console.log(order)
       res.send({ message: 'Order Delivered' })
     } else {
       res.status(404).send({ message: 'Order Not Found' })
