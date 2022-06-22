@@ -25,6 +25,13 @@ const reducer = (state, action) => {
       return { ...state, loadingUpdate: false }
     case 'UPDATE_FAIL':
       return { ...state, loadingUpdate: false }
+    case 'UPLOAD_REQUEST':
+      return { ...state, loadingUpload: true, errorUpload: '' }
+    case 'UPLOAD_SUCCESS':
+      return { ...state, loadingUpload: false, errorUpload: '' }
+    case 'UPLOAD_FAIL':
+      return { ...state, loadingUpload: false, errorUpload: action.payload }
+
     default:
       return state
   }
@@ -38,11 +45,12 @@ export const ProductEditScreen = () => {
   const { state } = useContext(Store)
   const { userInfo } = state
 
-  const [{ loading, error, loadingUpdate }, dispatch] = useReducer(reducer, {
-    loading: true,
-    error: '',
-    loadingUpdate: false,
-  })
+  const [{ loading, error, loadingUpdate, loadingUpload }, dispatch] =
+    useReducer(reducer, {
+      loading: true,
+      error: '',
+      loadingUpdate: false,
+    })
 
   const [name, setName] = useState('')
   const [slug, setSlug] = useState('')
@@ -104,6 +112,28 @@ export const ProductEditScreen = () => {
     }
   }
 
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0]
+    const bodyFormData = new FormData()
+    bodyFormData.append('file', file)
+    try {
+      dispatch({ type: 'UPLPAD_REQUEST' })
+
+      const { data } = await axios.post('/api/upload', bodyFormData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          authorization: `Bearer ${userInfo.token}`,
+        },
+      })
+      dispatch({ type: 'UPLPAD_SUCCESS' })
+      toast.success('Image uploaded successfully')
+      setImage(data.secure_url)
+    } catch (err) {
+      toast.error(getError(err))
+      dispatch({ type: 'UPLPAD_FAIL', payload: getError(err) })
+    }
+  }
+
   return (
     <Container className='small-container'>
       <Helmet>
@@ -147,6 +177,12 @@ export const ProductEditScreen = () => {
               onChange={(e) => setImage(e.target.value)}
               required
             />
+          </Form.Group>
+
+          <Form.Group className='mb-3' controlId='imageFile'>
+            <Form.Label>Upload File</Form.Label>
+            <Form.Control type='file' onChange={uploadFileHandler} />
+            {loadingUpload && <LoadingBox />}
           </Form.Group>
           <Form.Group className='mb-3' controlId='category'>
             <Form.Label>Category</Form.Label>
