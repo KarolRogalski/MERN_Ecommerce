@@ -3,7 +3,8 @@ import expressAsyncHandler from 'express-async-handler'
 import Product from '../models/productModel.js'
 import Order from '../models/orderModel.js'
 import User from '../models/userModel.js'
-import { isAuth, isAdmin } from '../utils.js'
+import nodemailer from 'nodemailer'
+import { isAuth, isAdmin, payOrderEmailTemplate } from '../utils.js'
 
 const orderRouter = express.Router()
 
@@ -123,7 +124,10 @@ orderRouter.put(
   '/:id/pay',
   isAuth,
   expressAsyncHandler(async (req, res) => {
-    const order = await Order.findById(req.params.id)
+    const order = await Order.findById(req.params.id).populate(
+      'user',
+      'email name'
+    )
     if (order) {
       order.isPaid = true
       order.paidAt = Date.now()
@@ -134,9 +138,39 @@ orderRouter.put(
         email_address: req.body.email_address,
       }
       const updateOrder = await order.save()
-      console.log('updated Order')
-      console.log(updateOrder)
-      res.send({ message: 'order Paid', order: updateOrder })
+
+      let transporter = nodemailer.createTransport({
+        host: 'smtp.ionos.co.uk',
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        auth: {
+          user: process.env.MAIL_USER, // generated ethereal user
+          pass: process.env.MAIL_PASSWORD, // generated ethereal password
+        },
+        tls: {
+          rejectUnauthorized: false,
+        },
+      })
+      // send mail with defined transport object
+      try {
+        let info = await transporter.sendMail({
+          from: '"MERN ECOMMERCE 👻" <test@rogalskikarol.co.uk>', // sender address
+          to: `${order.user.name} <${order.user.email}`, // list of receivers
+          subject: `✔ New Order ${order._id}`, // Subject line
+          text: 'Hello world?', // plain text body
+          html: payOrderEmailTemplate(order), // html body
+        })
+
+        console.log('Message sent: %s', info.messageId)
+        // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+        // Preview only available when sending through an Ethereal account
+        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info))
+      } catch (err) {
+        console.log(err)
+      }
+
+      res.send({ message: 'Order Paid', order: updateOrder })
     } else {
       res.status(404).send({ message: 'Order not found' })
     }
