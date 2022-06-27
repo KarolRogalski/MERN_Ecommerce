@@ -186,7 +186,6 @@ export const OrderScreen = () => {
       dispatch({ type: 'DELIVER_FAIL' })
     }
   }
-
   return loading ? (
     <LoadingBox></LoadingBox>
   ) : error ? (
@@ -211,8 +210,8 @@ export const OrderScreen = () => {
               </Card.Text>
               {order.isDelivered ? (
                 <MessageBox variant='success'>
-                  Delivered at {order.deliverdAt.substring(0, 10)}{' '}
-                  {order.deliverdAt.substring(11, 16)}
+                  Delivered at {order.deliveredAt.substring(0, 10)}{' '}
+                  {order.deliveredAt.substring(11, 16)}
                 </MessageBox>
               ) : (
                 <MessageBox variant='danger'>Not Delivered</MessageBox>

@@ -139,7 +139,7 @@ export const SearchScreen = () => {
                 <li key={c}>
                   <Link
                     className={c === category ? 'text-bold' : ''}
-                    to={getFilterUrl({ category: c })}
+                    to={getFilterUrl({ category: c, page: 1 })}
                   >
                     {c}
                   </Link>
@@ -161,7 +161,7 @@ export const SearchScreen = () => {
               {prices.map((p) => (
                 <li key={p.value}>
                   <Link
-                    to={getFilterUrl({ price: p.value })}
+                    to={getFilterUrl({ price: p.value, page: 1 })}
                     className={p.value === price ? 'text-blod' : ''}
                   >
                     {p.name}
@@ -176,7 +176,7 @@ export const SearchScreen = () => {
               {ratings.map((r) => (
                 <li key={r.name}>
                   <Link
-                    to={getFilterUrl({ rating: r.rating })}
+                    to={getFilterUrl({ rating: r.rating, page: 1 })}
                     className={`${r.rating} === ${rating}` ? 'text-bold' : ''}
                   >
                     <Rating caption={' & up'} rating={r.rating}></Rating>
@@ -222,7 +222,7 @@ export const SearchScreen = () => {
                   <select
                     value={order}
                     onChange={(e) => {
-                      navigate(getFilterUrl({ order: e.target.value }))
+                      navigate(getFilterUrl({ order: e.target.value, page: 1 }))
                     }}
                   >
                     <option value='newest'>Newest Arrivals</option>
