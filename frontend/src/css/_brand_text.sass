@@ -2,6 +2,9 @@
 //     background-clip: text
 //     -webkit-text-fill-color: transparent
 
+$color-dark: #172601
+$color-dark: #426809
+
 body
     background-color: #141114
     background-image: linear-gradient(335deg, black 23px, transparent 23px),
@@ -12,21 +15,18 @@ body
     background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px
 
 .sign
-    // position: absolute
-    // left: 50%
-    // top: 50%
-    // transform: translate(-50%, -50%)
+    margin: 0 1rem 0 1rem
     display: flex
     justify-content: center
     align-items: center
-    // width: 50%
-    // height: 50%
     background-image: radial-gradient(ellipse 50% 35% at 50% 50%, #6b1839, transparent)
+    background-image: radial-gradient(ellipse 50% 35% at 50% 50%, $color-dark, transparent)
     letter-spacing: 0.2rem
     // text-transform: uppercase
     font-size: 1.25rem
     color: #ffe6ff
     text-shadow: 0 0 0.6rem #ffe6ff, 0 0 1.5rem #ff65bd, -0.2rem 0.1rem 1rem #ff65bd, 0.2rem 0.1rem 1rem #ff65bd, 0 -0.5rem 2rem #ff2483, 0 0.5rem 3rem #ff2483
+    text-shadow: 0 0 0.6rem lighten($color-dark,30 ), 0 0 1.5rem lighten($color-dark,20 ), -0.2rem 0.1rem 1rem lighten($color-dark,20 ), 0.2rem 0.1rem 1rem lighten($color-dark,20 ), 0 -0.5rem 2rem lighten($color-dark,5 ), 0 0.5rem 3rem lighten($color-dark,5)
     animation: shine 2s forwards, flicker 3s infinite
 
 @keyframes blink
@@ -36,15 +36,16 @@ body
     75%
         color: #ffe6ff
         text-shadow: 0 0 0.6rem #ffe6ff, 0 0 1.5rem #ff65bd, -0.2rem 0.1rem 1rem #ff65bd, 0.2rem 0.1rem 1rem #ff65bd, 0 -0.5rem 2rem #ff2483, 0 0.5rem 3rem #ff2483
+        text-shadow: 0 0 0.6rem lighten($color-dark,30 ), 0 0 1.5rem lighten($color-dark,20 ), -0.2rem 0.1rem 1rem lighten($color-dark,20 ), 0.2rem 0.1rem 1rem lighten($color-dark,20 ), 0 -0.5rem 2rem lighten($color-dark,5 ), 0 0.5rem 3rem lighten($color-dark,5)
 
     28%,
     33%
-        color: #ff65bd
+        color: lighten($color-dark,15 )
         text-shadow: none
 
     82%,
     97%
-        color: #ff2483
+        color: lighten($color-dark,5 )
         text-shadow: none
 
 .flicker
@@ -55,12 +56,13 @@ body
 
 @keyframes shine
     0%
-        color: #6b1839
+        color: lighten($color-dark,15 )
         text-shadow: none
 
     100%
         color: #ffe6ff
         text-shadow: 0 0 0.6rem #ffe6ff, 0 0 1.5rem #ff65bd, -0.2rem 0.1rem 1rem #ff65bd, 0.2rem 0.1rem 1rem #ff65bd, 0 -0.5rem 2rem #ff2483, 0 0.5rem 3rem #ff2483
+        text-shadow: 0 0 0.6rem lighten($color-dark,30 ), 0 0 1.5rem lighten($color-dark,20 ), -0.2rem 0.1rem 1rem lighten($color-dark,20 ), 0.2rem 0.1rem 1rem lighten($color-dark,20 ), 0 -0.5rem 2rem lighten($color-dark,5 ), 0 0.5rem 3rem lighten($color-dark,5)
 
 @keyframes flicker
     from
