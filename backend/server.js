@@ -58,7 +58,6 @@ const io = new Server(httpServer, { cors: { orgin: '*' } })
 const users = []
 
 io.on('connection', (socket) => {
-  console.log(users)
   socket.on('disconnect', () => {
     const user = users.find((x) => x.socketId === socket.id)
     if (user) {
@@ -103,7 +102,6 @@ io.on('connection', (socket) => {
   })
 
   socket.on('onMessage', (message) => {
-    console.log(users)
     if (message.isAdmin) {
       const user = users.find((x) => x._id === message._id && x.online)
       if (user) {

@@ -33,9 +33,9 @@ import { ProductEditScreen } from './screens/ProductEditScreen'
 import { OrderListScreen } from './screens/OrderListScreen'
 import { UserListScreen } from './screens/UserListScreen'
 import { UserEditScreen } from './screens/UserEditScreen'
-
 import { ChatBox } from './components/ChatBox'
 import SupportScreen from './screens/SupportScreen'
+import './css/style.css'
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store)
@@ -85,8 +85,14 @@ function App() {
                 <i className='fas fa-bars'></i>
               </Button>
               <LinkContainer to='/'>
-                <Navbar.Brand>BugBuy</Navbar.Brand>
+                <Navbar.Brand id='navbar-brand'>
+                  <div className='sign'>
+                    <span class='fast-flicker'>B</span>uy
+                    <span class='flicker'>B</span>ug
+                  </div>
+                </Navbar.Brand>
               </LinkContainer>
+
               <Navbar.Toggle aria-controls='basic-navbar-nav' />
               <Navbar.Collapse id='basic-navbar-nav'>
                 <Searchbox />

@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import socketIOClient from 'socket.io-client'
 import MessageBox from '../components/MessageBox'
 import { Store } from '../Store'
-import '../css/style.css'
 import { toast } from 'react-toastify'
 
 let allUsers = []
