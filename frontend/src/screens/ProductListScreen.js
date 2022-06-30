@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useContext, useEffect, useReducer } from 'react'
+import React, { useContext, useEffect, useReducer, useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
@@ -39,6 +39,11 @@ const reducer = (state, action) => {
       return { ...state, loadingDelete: false, successDelete: false }
     case 'DELETE_RESET':
       return { ...state, loadingDelete: false, successDelete: false }
+    case 'SEARCH_SUCCESS':
+      return {
+        ...state,
+        products: action.payload,
+      }
     default:
       return state
   }
@@ -78,7 +83,6 @@ export const ProductListScreen = () => {
         })
         dispatch({ type: 'FETCH_SUCCESS', payload: data })
       } catch (err) {
-        console.log(err)
         dispatch({ type: 'FETCH_FALIL', payload: getError(err) })
       }
     }
@@ -126,23 +130,65 @@ export const ProductListScreen = () => {
     }
   }
 
+  const [filteredItems, setFilteredItems] = useState([])
+  const [searchTxt, setSearchTxt] = useState('')
+  const searchHandler = (text) => {
+    setSearchTxt(text)
+    let tempItems = products
+      .filter(
+        (prod) => prod.name.toLowerCase().indexOf(text.toLowerCase()) !== -1
+      )
+      .concat(
+        products.filter(
+          (prod) =>
+            prod.category.toLowerCase().indexOf(text.toLowerCase()) !== -1
+        ),
+        products.filter(
+          (prod) => prod._id.toLowerCase().indexOf(text.toLowerCase()) !== -1
+        ),
+        products.filter(
+          (prod) => prod.brand.toLowerCase().indexOf(text.toLowerCase()) !== -1
+        ),
+        products.filter(
+          (prod) => prod.price.toString().indexOf(text.toLowerCase()) !== -1
+        )
+      )
+      .reduce((accumulator, current) => {
+        if (!accumulator.find(({ _id }) => _id === current._id)) {
+          accumulator.push(current)
+        }
+        return accumulator
+      }, [])
+    setFilteredItems(tempItems)
+  }
+
   return (
     <div>
       <Helmet>
         <title>Admin -products</title>
       </Helmet>
-      <Row>
-        <Col>
+      <div className='row'>
+        <div className='col-5'>
           <h1>Products</h1>
-        </Col>
-        <Col className='col text-end'>
+        </div>
+        <div className='col-5'>
           <div>
-            <Button type='button' onClick={createHandler}>
+            <button type='button' onClick={createHandler}>
               Create Product
-            </Button>
+            </button>
           </div>
-        </Col>
-      </Row>
+        </div>
+
+        <label>
+          <input
+            type='text'
+            placeholder='e.g. spider'
+            onChange={(e) => searchHandler(e.target.value)}
+          />
+          <span>Search</span>
+          <span className='box-underline'></span>
+        </label>
+      </div>
       {loadingCreate && <LoadingBox />}
       {loadingDelete && <LoadingBox />}
       {loading ? (
@@ -150,7 +196,7 @@ export const ProductListScreen = () => {
       ) : error ? (
         <MessageBox variant='danger'>{error}</MessageBox>
       ) : (
-        <>
+        <div className='table-wrap'>
           <table className='table'>
             <thead>
               <tr>
@@ -163,35 +209,69 @@ export const ProductListScreen = () => {
               </tr>
             </thead>
             <tbody>
-              {products.map((product) => (
-                <tr key={product._id}>
-                  <td>{product._id}</td>
-                  <td>{product.name}</td>
-                  <td>{product.price}</td>
-                  <td>{product.category}</td>
-                  <td>{product.brand}</td>
-                  <td>
-                    <Button
-                      type='button'
-                      variant='light'
-                      onClick={() => navigate(`/admin/product/${product._id}`)}
-                    >
-                      Edit
-                    </Button>
-                    &nbsp;
-                    <Button
-                      type='button'
-                      variant='light'
-                      onClick={() => deleteHandler(product)}
-                    >
-                      Delete
-                    </Button>
-                  </td>
-                </tr>
-              ))}
+              {searchTxt &&
+                filteredItems.map((product) => (
+                  <tr key={product._id}>
+                    <td>{product._id}</td>
+                    <td>{product.name}</td>
+                    <td>{product.price}</td>
+                    <td>{product.category}</td>
+                    <td>{product.brand}</td>
+                    <td>
+                      <button
+                        type='button'
+                        variant='light'
+                        onClick={() =>
+                          navigate(`/admin/product/${product._id}`)
+                        }
+                      >
+                        Edit
+                      </button>
+                      &nbsp;
+                      <button
+                        type='button'
+                        variant='light'
+                        onClick={() => deleteHandler(product)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              {!searchTxt &&
+                products &&
+                products.map((product) => (
+                  <tr key={product._id}>
+                    <td>{product._id}</td>
+                    <td>{product.name}</td>
+                    <td>{product.price}</td>
+                    <td>{product.category}</td>
+                    <td>{product.brand}</td>
+                    <td>
+                      <button
+                        type='button'
+                        variant='light'
+                        onClick={() =>
+                          navigate(`/admin/product/${product._id}`)
+                        }
+                      >
+                        Edit
+                      </button>
+                      &nbsp;
+                      <button
+                        type='button'
+                        variant='light'
+                        onClick={() => deleteHandler(product)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
-          <div>
+
+          <div style={{ display: 'none' }}>
             {[...Array(pages).keys()].map((x) => (
               <Link
                 className={x + 1 === Number(page) ? 'btn text-bold' : 'btn'}
@@ -202,7 +282,7 @@ export const ProductListScreen = () => {
               </Link>
             ))}
           </div>
-        </>
+        </div>
       )}
     </div>
   )

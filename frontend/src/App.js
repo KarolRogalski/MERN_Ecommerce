@@ -87,8 +87,8 @@ function App() {
               <LinkContainer to='/'>
                 <Navbar.Brand id='navbar-brand'>
                   <div className='sign'>
-                    <span class='fast-flicker'>B</span>uy
-                    <span class='flicker'>B</span>ug
+                    <span className='fast-flicker'>B</span>uy
+                    <span className='flicker'>B</span>ug
                   </div>
                 </Navbar.Brand>
               </LinkContainer>
@@ -174,105 +174,106 @@ function App() {
             ))}
           </Nav>
         </div>
-        <main>
-          <Container className='mt-3'>
-            <Routes>
-              <Route path='product/:slug' element={<ProductScreen />} />
-              <Route path='/cart' element={<CartScreen />} />
-              <Route path='/search' element={<SearchScreen />} />
-              <Route path='/signin' element={<SigninScreen />} />
-              <Route path='/signup' element={<SignupScreen />} />
-              <Route
-                path='/profile'
-                element={
-                  <ProtectedRoute>
-                    <ProfileScreen />
-                  </ProtectedRoute>
-                }
-              />
-              <Route path='/shipping' element={<ShippingAddressScreen />} />
-              <Route path='/payment' element={<PaymentMethodScreen />} />
-              <Route path='/placeorder' element={<PlaceOrderScreen />} />
-              <Route
-                path='/order/:id'
-                element={
-                  <ProtectedRoute>
-                    <OrderScreen />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path='/orderhistory'
-                element={
-                  <ProtectedRoute>
-                    <OrderHistoryScreen />
-                  </ProtectedRoute>
-                }
-              />
-              {/* Admin Routes*/}
-              <Route
-                path='admin/dashboard'
-                element={
-                  <AdminRoute>
-                    <DashboardScreen />
-                  </AdminRoute>
-                }
-              />
-              <Route
-                path='admin/products'
-                element={
-                  <AdminRoute>
-                    <ProductListScreen />
-                  </AdminRoute>
-                }
-              />
-              <Route
-                path='admin/product/:id'
-                element={
-                  <AdminRoute>
-                    <ProductEditScreen />
-                  </AdminRoute>
-                }
-              />
-              <Route
-                path='admin/orders'
-                element={
-                  <AdminRoute>
-                    <OrderListScreen />
-                  </AdminRoute>
-                }
-              />
-              <Route
-                path='admin/users'
-                element={
-                  <AdminRoute>
-                    <UserListScreen />
-                  </AdminRoute>
-                }
-              />
-              <Route
-                path='admin/user/:id'
-                element={
-                  <AdminRoute>
-                    <UserEditScreen />
-                  </AdminRoute>
-                }
-              />
-              <Route
-                path='admin/support'
-                element={
-                  <AdminRoute>
-                    <SupportScreen />
-                  </AdminRoute>
-                }
-              />
-              <Route path='/' element={<HomeScreen />} />
-            </Routes>
-          </Container>
-        </main>
+        <div className='main-app-container'>
+          <Routes>
+            <Route path='product/:slug' element={<ProductScreen />} />
+            <Route path='/cart' element={<CartScreen />} />
+            <Route path='/search' element={<SearchScreen />} />
+            <Route path='/signin' element={<SigninScreen />} />
+            <Route path='/signup' element={<SignupScreen />} />
+            <Route
+              path='/profile'
+              element={
+                <ProtectedRoute>
+                  <ProfileScreen />
+                </ProtectedRoute>
+              }
+            />
+            <Route path='/shipping' element={<ShippingAddressScreen />} />
+            <Route path='/payment' element={<PaymentMethodScreen />} />
+            <Route path='/placeorder' element={<PlaceOrderScreen />} />
+            <Route
+              path='/order/:id'
+              element={
+                <ProtectedRoute>
+                  <OrderScreen />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path='/orderhistory'
+              element={
+                <ProtectedRoute>
+                  <OrderHistoryScreen />
+                </ProtectedRoute>
+              }
+            />
+            {/* Admin Routes*/}
+            <Route
+              path='admin/dashboard'
+              element={
+                <AdminRoute>
+                  <DashboardScreen />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path='admin/products'
+              element={
+                <AdminRoute>
+                  <ProductListScreen />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path='admin/product/:id'
+              element={
+                <AdminRoute>
+                  <ProductEditScreen />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path='admin/orders'
+              element={
+                <AdminRoute>
+                  <OrderListScreen />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path='admin/users'
+              element={
+                <AdminRoute>
+                  <UserListScreen />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path='admin/user/:id'
+              element={
+                <AdminRoute>
+                  <UserEditScreen />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path='admin/support'
+              element={
+                <AdminRoute>
+                  <SupportScreen />
+                </AdminRoute>
+              }
+            />
+            <Route path='/' element={<HomeScreen />} />
+          </Routes>
+        </div>
         <footer>
           {userInfo && !userInfo.isAdmin && <ChatBox userInfo={userInfo} />}
-          <div className='text-center'> All rights reserved</div>
+          <div className='footer'>
+            Copyright © 2022 Karol{'\xa0'}Rogalski. All{'\xa0'}rights{'\xa0'}
+            reserved
+          </div>
         </footer>
       </div>
     </BrowserRouter>

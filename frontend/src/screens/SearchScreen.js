@@ -115,15 +115,35 @@ export const SearchScreen = () => {
 
     return `/search?page=${filterPage}&query=${filterQuery}&category=${filterCategory}&price=${filterPrice}&rating=${filterRating}&order=${filterOrder}`
   }
-
+  const [showFilter, setShowFilter] = useState(true)
+  const filterToggle = () => {
+    setShowFilter(!showFilter)
+  }
   return (
     <div>
       <Helmet>
         <title>Search Products</title>
       </Helmet>
 
-      <Row>
-        <Col md={3}>
+      <div className='search-row'>
+        <div
+          className={
+            showFilter ? 'search-filter' : 'search-filter search-filter-hidden'
+          }
+        >
+          <div className='search-row-toggle' onClick={filterToggle}>
+            <h2>Filter</h2>
+            <button
+              className={
+                showFilter
+                  ? 'search-filter-btn-toggle'
+                  : 'search-filter-btn-toggle rotate-180'
+              }
+            >
+              ^
+            </button>
+          </div>
+
           <h3>Department</h3>
           <div>
             <ul>
@@ -193,16 +213,16 @@ export const SearchScreen = () => {
               </li>
             </ul>
           </div>
-        </Col>
-        <Col md={9}>
+        </div>
+        <div className='search-resoult'>
           {loading ? (
             <LoadingBox></LoadingBox>
           ) : error ? (
             <MessageBox variant='danger'>{error}</MessageBox>
           ) : (
             <>
-              <Row className='justify-content-beetween mb-3'>
-                <Col md={6}>
+              <div className='search-result-row'>
+                <span className='search-span'>
                   {countProducts === 0 ? 'No' : countProducts} Results
                   {query !== 'all' && ' : ' + query}
                   {category !== 'all' && ' : ' + category}
@@ -212,13 +232,16 @@ export const SearchScreen = () => {
                   category !== 'all' ||
                   rating !== 'all' ||
                   price !== 'all' ? (
-                    <Button variant='light' onClick={() => navigate('/search')}>
+                    <button
+                      className='filter-btn-delete'
+                      onClick={() => navigate('/search')}
+                    >
                       <i className='fas fa-times-circle'></i>
-                    </Button>
+                    </button>
                   ) : null}
-                </Col>
-                <Col className='text-end'>
-                  Sort by{' '}
+                </span>
+                <span className='search-span'>
+                  Sort by{': '}
                   <select
                     value={order}
                     onChange={(e) => {
@@ -230,38 +253,37 @@ export const SearchScreen = () => {
                     <option value='highest'>Price: Height to Low</option>
                     <option value='toprated'>Avg. Customer Reviews</option>
                   </select>
-                </Col>
-              </Row>
+                </span>
+              </div>
               {products.lenght === 0 && (
                 <MessageBox>No Products Found</MessageBox>
               )}
-              <Row>
+              <div className='search-row'>
                 {products.map((product) => (
-                  <Col sm={6} lg={4} className='mb-3' key={product._id}>
-                    <Product product={product}></Product>
-                  </Col>
+                  <Product key={product._id} product={product}></Product>
                 ))}
-              </Row>
+              </div>
               <div>
                 {[...Array(pages).keys()].map((x) => (
-                  <LinkContainer
+                  // <span
+                  //   key={x + 1}
+                  //   className='mx-1'
+                  //   to={getFilterUrl({ page: x + 1 })}
+                  // >
+                  <button
                     key={x + 1}
-                    className='mx-1'
-                    to={getFilterUrl({ page: x + 1 })}
+                    className={Number(page) === x + 1 ? 'active mx-1' : 'mx-1'}
+                    onClick={() => navigate(getFilterUrl({ page: x + 1 }))}
                   >
-                    <Button
-                      className={Number(page) === x + 1 ? 'text-bold' : ''}
-                      variant='light'
-                    >
-                      {x + 1}
-                    </Button>
-                  </LinkContainer>
+                    {x + 1}
+                  </button>
+                  // </span>
                 ))}
               </div>
             </>
           )}
-        </Col>
-      </Row>
+        </div>
+      </div>
     </div>
   )
 }

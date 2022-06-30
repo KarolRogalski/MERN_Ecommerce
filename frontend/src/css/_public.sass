@@ -1,0 +1,162 @@
+*
+    color: #ff6224
+    box-sizing: border-box
+    &:focus
+        outline: 0
+
+body
+    background-color: #141114
+    background-image: linear-gradient(335deg, black 23px, transparent 23px),
+    linear-gradient(155deg, black 23px, transparent 23px),
+    linear-gradient(335deg, black 23px, transparent 23px),
+    linear-gradient(155deg, black 23px, transparent 23px)
+    background-size: 58px 58px
+    background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px
+
+.h1, h1
+    font-size: calc(1.375rem + 1.5vw)
+    font-variant: small-caps
+h2
+    font-size: calc(1.325rem + .9vw)
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6
+    margin-top: 0
+    margin-bottom: .5rem
+    font-weight: 500
+    line-height: 1.2
+
+.main-app-container
+    margin: 0 auto
+    width: 100%
+    min-height: 87vh
+    max-width: 1200px
+    padding: 1rem 0.5rem 1rem 0.5rem
+.div-bg
+    background: $color-bg
+    background-image: url('/public/images/bg.png')
+    background-size: cover
+.products
+    display: grid
+    grid-template-columns: repeat(auto-fill, 23%)
+    grid-gap: 1rem
+    justify-content: space-between
+@media all and (max-width:900px)
+    .products
+        grid-template-columns: repeat(auto-fill, 31%)
+@media all and (max-width:600px)
+    .products
+        grid-template-columns: repeat(auto-fill, 48%)
+
+.table-wrap
+    max-width: 100%
+    overflow-x: auto
+    white-space: nowrap
+
+.footer
+    height: 3.5rem
+    background: $color-bg
+    display: flex
+    justify-content: center
+    align-items: center
+    text-align: center
+
+button
+    border-radius: 0.5rem
+    padding: 0.375rem 0.75rem
+    line-height: 1.5rem
+    color: white
+    font-size: 1rem
+    font-weight: 400
+    background: #759819
+    cursor: pointer
+    border: none
+    transition: 0.5s
+    &:hover,
+        background: lighten(#759819,10 )
+        box-shadow: inset 0px 0px 7px 2px white
+        color: $color-bg
+    &:hover > i
+        color: lighten(#426809, 30)
+    &:focus
+        outline: 0
+.active
+    background: lighten(#759819,10 )
+    box-shadow: inset 0px 0px 7px 2px white
+    color: $color-bg
+    font-weight: bold
+.mx-1
+    margin: 0.25rem
+    .btn-dark
+        &:focus
+            outline: 0
+.img-thumbnail
+    padding: 0.15rem
+    background-color: #fff
+    border: 1px solid #dee2e6
+    border-radius: 0.25rem
+    max-width: 100%
+    height: 6rem
+.display-none
+    display: none
+.display-block
+    display: block
+
+.btn-primary, .btn-outline-primary
+    background: $color-dark-green
+    border: none
+.card
+    background: #212529
+.rating span
+    color: #ff6224
+a
+    display: block
+    text-decoration: none
+    color: $color-orange
+    &:hover
+        color: lighten(#426809, 30)
+
+.fa
+    color: $color-orange
+    &:hover
+        color: lighten($color-dark-green, 30)
+
+.title
+    margin-bottom: 1rem
+
+.row
+    display: flex
+    flex-wrap: wrap
+    width: 100%
+    justify-content: space-between
+    align-content: center
+    padding: 0
+    margin: 0
+.col-9, .col-8, .col-7,.col-6,.col-5, .col-4, .col-3 ,.col-2, .col-1
+    padding: 0.5rem
+    align-content: center
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+.col-9
+    width: calc(75% - 0.5rem )
+.col-8
+    width: calc(66.66% - 1rem )
+.col-7
+    width: calc(58.33% - 1rem )
+.col-6
+    width: calc(50% - 1rem )
+.col-5
+    width: calc(41.66% - 1rem )
+.col-4
+    width: calc( 33.33 - 1rem )
+.col-3
+    width: calc( 25% - 0.5rem )
+.col-2
+    width: calc(16.66% - 1rem )
+.col-1
+    width: calc(8.33% - 1rem )
+.btn-icon
+    padding: 0
+    width: 30px
+    height: 30px

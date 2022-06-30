@@ -87,3 +87,6 @@ transition: 0.5s;
 button.thumbnail{
   padding: 0;
 }
+.shoping-cart-right-summary{
+  background-image: url('/public/images/bg.png');
+}

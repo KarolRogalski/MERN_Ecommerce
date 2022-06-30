@@ -196,7 +196,7 @@ export const OrderScreen = () => {
         <title>Order {orderId}</title>
       </Helmet>
       <h1 className='my-3'>Order {orderId}</h1>
-      <Row>
+      <div className='row'>
         <Col md={8}>
           <Card className='mb-3'>
             <Card.Body>
@@ -321,7 +321,7 @@ export const OrderScreen = () => {
             </Card.Body>
           </Card>
         </Col>
-      </Row>
+      </div>
     </div>
   )
 }

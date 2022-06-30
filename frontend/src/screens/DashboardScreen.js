@@ -6,9 +6,6 @@ import LoadingBox from '../components/LoadingBox'
 import MessageBox from '../components/MessageBox'
 import { Store } from '../Store'
 import { getError } from '../utils'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Card from 'react-bootstrap/Card'
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -59,57 +56,47 @@ export const DashboardScreen = () => {
         <MessageBox variant='danger'>{error}</MessageBox>
       ) : (
         <>
-          <Row>
-            <Col md={4}>
-              <Card>
-                <Card.Body>
-                  <Card.Title>
-                    {summary
-                      ? summary.users && summary.users[0]
-                        ? summary.users[0].numUsers
-                        : 0
-                      : 'data not found'}
-                  </Card.Title>
-                  <Card.Text>Users</Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col md={4}>
-              <Card>
-                <Card.Body>
-                  <Card.Title>
-                    {summary
-                      ? summary.orders && summary.users[0]
-                        ? summary.orders[0].numOrders
-                        : 0
-                      : 'data not found'}
-                  </Card.Title>
-                  <Card.Text>Orders</Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col md={4}>
-              <Card>
-                <Card.Body>
-                  <Card.Title>
-                    £
-                    {summary
-                      ? summary.orders && summary.users[0]
-                        ? summary.orders[0].totalSales.toFixed(2)
-                        : 0
-                      : 'data not found'}
-                  </Card.Title>
-                  <Card.Text>Orders</Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
+          <div className='row'>
+            <div className='dashboard-stats div-bg'>
+              <h5>Users</h5>
+              <h5>
+                {summary
+                  ? summary.users && summary.users[0]
+                    ? summary.users[0].numUsers
+                    : 0
+                  : 'data not found'}
+              </h5>
+            </div>
+            <div className='dashboard-stats div-bg'>
+              <h5>Orders</h5>
+              <h5>
+                {summary
+                  ? summary.orders && summary.users[0]
+                    ? summary.orders[0].numOrders
+                    : 0
+                  : 'data not found'}
+              </h5>
+            </div>
+            <div className='dashboard-stats div-bg'>
+              <h5>Total</h5>
+              <h5>
+                {' '}
+                £
+                {summary
+                  ? summary.orders && summary.users[0]
+                    ? summary.orders[0].totalSales.toFixed(2)
+                    : 0
+                  : 'data not found'}
+              </h5>
+            </div>
+          </div>
           <div className='my-3'>
             <h2>Sales</h2>
             {summary.dailyOrders.length === 0 ? (
               <MessageBox>No Sales</MessageBox>
             ) : (
               <Chart
+                className='chart div-bg'
                 width='100%'
                 height='400px'
                 chartType='AreaChart'
@@ -120,6 +107,20 @@ export const DashboardScreen = () => {
                     .sort((a, b) => (a._id > b._id ? 1 : -1))
                     .map((x) => [x._id, x.sales]),
                 ]}
+                options={{
+                  colors: ['#83ff24'],
+                  backgroundColor: {
+                    fill: '#212529',
+                    fillOpacity: 0.1,
+                  },
+                  legendTextStyle: { color: '#ff6224' },
+                  hAxis: {
+                    textStyle: { color: '#ff6224' },
+                  },
+                  vAxis: {
+                    textStyle: { color: '#ff6224' },
+                  },
+                }}
               ></Chart>
             )}
           </div>
@@ -129,6 +130,7 @@ export const DashboardScreen = () => {
               <MessageBox>No Category</MessageBox>
             ) : (
               <Chart
+                className='chart div-bg'
                 width='100%'
                 height='400px'
                 chartType='PieChart'
@@ -139,6 +141,19 @@ export const DashboardScreen = () => {
                     .sort((a, b) => (a._id > b._id ? 1 : -1))
                     .map((x) => [x._id, x.count]),
                 ]}
+                options={{
+                  backgroundColor: {
+                    fill: '#212529',
+                    fillOpacity: 0.1,
+                  },
+                  legendTextStyle: { color: '#ff6224' },
+                  hAxis: {
+                    textStyle: { color: '#ff6224' },
+                  },
+                  vAxis: {
+                    textStyle: { color: '#ff6224' },
+                  },
+                }}
               ></Chart>
             )}
           </div>

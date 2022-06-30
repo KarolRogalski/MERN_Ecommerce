@@ -1,0 +1,100 @@
+body
+    background-image: url('/public/images/front_3-promo-1.jpg')
+    background-size: cover
+    background-position: center
+    background-attachment: fixed
+.product-main
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+.product-images
+    background: rgba(33, 37, 41,0.5)
+    background-image: url('/public/images/bg.png')
+    background-size: cover
+    width: 49%
+    display: flex
+    flex-direction: column
+.product-img-large
+    width: 100%
+    height: auto
+    max-height: 60vh
+    height: 60vh
+    object-fit: contain
+    object-position: left bottom
+    &:hover
+        background: transparent
+        border: none
+.product-img-small
+    height: 6rem
+    display: flex
+    flex-wrap: wrap
+    justify-content: flex-start
+    img
+        max-width: 25%
+        flex: 1 1 auto
+        border-radius: 0
+.product-details
+    background: $color-bg
+    background-image: url('/public/images/bg.png')
+    background-size: cover
+    border-radius: 1rem
+    padding: 1rem 1.5rem 0 1.5rem
+    width: 49%
+    display: flex
+    flex-direction: column
+    .rating
+        margin: 2rem 0 2rem 0
+    h2
+        display: inline-block
+        max-width: 50%
+        position: relative
+    .product-stock
+        position: absolute
+        left: 7rem
+        top: 50%
+        transform: translateY(-50%)
+        display: inline-block
+        font-size: 0.75rem
+        letter-spacing: 0.1rem
+        padding: 0.3rem
+        border-radius: 0.4rem
+        max-width: min-content
+    .success
+        background: $color-dark-green
+    .danger
+        background: #6c757d
+        strong
+            color: #fff
+    hr
+        margin: 2rem
+    p
+        margin-bottom: 2rem
+    button
+        margin-bottom: 1.5rem
+.product-reviews
+    margin: 3rem auto 2rem auto
+    max-width: 95%
+    h2
+        margin: 1rem 0
+    .reviews-wrap
+        margin-bottom: 1rem
+        border-radius: 1rem
+        background: $color-bg
+        background-image: url('/public/images/bg.png')
+        background-size: cover
+    .single-review
+        padding: 0.5rem 1rem
+        // border-bottom: 1px solid $color-orange
+    .rating
+        margin: 0.7rem 0 0.7rem 0
+
+@media all and (max-width:680px)
+    .product-main
+        flex-direction: column
+    .product-images
+        width: 100%
+    .product-details
+        margin-top: 2rem
+        width: 100%
+    .product-img-large
+        object-position: center

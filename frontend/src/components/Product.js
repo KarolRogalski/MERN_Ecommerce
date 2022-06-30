@@ -1,6 +1,4 @@
 import React, { useContext } from 'react'
-import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom'
 import Rating from './Rating'
 import axios from 'axios'
@@ -26,25 +24,31 @@ function Product(props) {
   }
 
   return (
-    <Card className='h-100 justify-content-between'>
+    <div className='product-card'>
       <Link to={`/product/${product.slug}`}>
-        <img src={product.image} className='card-img-top' alt={product.name} />
+        <div className='img-wrap'>
+          <img
+            src={product.image}
+            className='card-img-top'
+            alt={product.name}
+          />
+        </div>
       </Link>
-      <Card.Body style={{ flex: 0 }}>
+      <div className='product-card-details'>
         <Link to={`/product/${product.slug}`}>
-          <Card.Title>{product.name}</Card.Title>
+          <h5>{product.name}</h5>
         </Link>
         <Rating rating={product.rating} numReviews={product.numReviews} />
-        <Card.Text>£{product.price}</Card.Text>
+        <p>£{product.price}</p>
         {product.countInStock === 0 ? (
-          <Button variant='light' disabled>
-            Out of Stock
-          </Button>
+          <button disabled>Out of Stock</button>
         ) : (
-          <Button onClick={() => addToCartHandler(product)}>Add to cart</Button>
+          <button onClick={() => addToCartHandler(product)}>
+            Add{'\xa0'}to{'\xa0'}cart
+          </button>
         )}
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   )
 }
 
