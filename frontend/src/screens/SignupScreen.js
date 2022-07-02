@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+
 import { Helmet } from 'react-helmet-async'
 import Axios from 'axios'
 import { useContext, useEffect, useState } from 'react'
@@ -84,7 +84,7 @@ export default function SignupScreen() {
           />
         </Form.Group>
         <div className='mb-3'>
-          <Button type='submit'>Sign Up</Button>
+          <button type='submit'>Sign Up</button>
         </div>
         <div className='mb-3'>
           Already have an account?{' '}

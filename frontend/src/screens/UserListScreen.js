@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useContext, useEffect, useReducer } from 'react'
+import React, { useContext, useEffect, useReducer, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -75,12 +75,54 @@ export const UserListScreen = () => {
       }
     }
   }
+  const [filteredItems, setFilteredItems] = useState([])
+  const [searchTxt, setSearchTxt] = useState('')
+  const searchHandler = (text) => {
+    const textAdmin = 'admin yes'
+    setSearchTxt(text)
+    let tempItems = users
+      .filter(
+        (prod) => prod.name.toLowerCase().indexOf(text.toLowerCase()) !== -1
+      )
+      .concat(
+        users.filter(
+          (prod) =>
+            prod.isAdmin &&
+            textAdmin.toLowerCase().indexOf(text.toLowerCase()) !== -1
+        ),
+        users.filter(
+          (prod) => prod.email.toLowerCase().indexOf(text.toLowerCase()) !== -1
+        ),
+        users.filter(
+          (prod) => prod._id.toLowerCase().indexOf(text.toLowerCase()) !== -1
+        )
+      )
+      .reduce((accumulator, current) => {
+        if (!accumulator.find(({ _id }) => _id === current._id)) {
+          accumulator.push(current)
+        }
+        return accumulator
+      }, [])
+    setFilteredItems(tempItems)
+  }
   return (
     <div>
       <Helmet>
         <title>Users</title>
       </Helmet>
-      <h1>Users</h1>
+      <h1 className='title'>Users</h1>
+      <div className='product-search-row div-bg'>
+        <label className='label'>
+          <input
+            type='text'
+            placeholder='e.g. spider'
+            onChange={(e) => searchHandler(e.target.value)}
+          />
+          <span>Search</span>
+          <span className='box-underline'></span>
+          <i className='search-icon fas fa-search'></i>
+        </label>
+      </div>
       {loadingDelete && <LoadingBox />}
       {loading ? (
         <LoadingBox />
@@ -99,32 +141,61 @@ export const UserListScreen = () => {
               </tr>
             </thead>
             <tbody>
-              {users.map((user) => (
-                <tr key={user._id}>
-                  <td>{user._id}</td>
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
-                  <td>{user.isAdmin ? 'YES' : 'NO'}</td>
-                  <td>
-                    <button
-                      type='button'
-                      variant='light'
-                      onClick={() => navigate(`/admin/user/${user._id}`)}
-                    >
-                      Edit
-                    </button>
-                    &nbsp;
-                    <button
-                      disabled={loadingDelete}
-                      type='button'
-                      variant='light'
-                      onClick={() => deleteHandler(user)}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              {searchTxt &&
+                filteredItems.map((user) => (
+                  <tr key={user._id}>
+                    <td>{user._id}</td>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>{user.isAdmin ? 'YES' : 'NO'}</td>
+                    <td>
+                      <button
+                        type='button'
+                        variant='light'
+                        onClick={() => navigate(`/admin/user/${user._id}`)}
+                      >
+                        Edit
+                      </button>
+                      &nbsp;
+                      <button
+                        disabled={loadingDelete}
+                        type='button'
+                        variant='light'
+                        onClick={() => deleteHandler(user)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              {users &&
+                !searchTxt &&
+                users.map((user) => (
+                  <tr key={user._id}>
+                    <td>{user._id}</td>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>{user.isAdmin ? 'YES' : 'NO'}</td>
+                    <td>
+                      <button
+                        type='button'
+                        variant='light'
+                        onClick={() => navigate(`/admin/user/${user._id}`)}
+                      >
+                        Edit
+                      </button>
+                      &nbsp;
+                      <button
+                        disabled={loadingDelete}
+                        type='button'
+                        variant='light'
+                        onClick={() => deleteHandler(user)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>

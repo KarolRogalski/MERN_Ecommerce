@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
+
 import ListGroup from 'react-bootstrap/ListGroup'
 import { toast } from 'react-toastify'
 import { getError } from '../utils'
@@ -80,111 +80,98 @@ export const PlaceOrderScreen = () => {
       <Helmet>
         <title>Preview Order</title>
       </Helmet>
-      <h1 className='my-3'>Preview Order</h1>
-      <Row>
-        <Col md={8}>
-          <Card className='mb-3'>
-            <Card.Body>
-              <Card.Title>Shipping</Card.Title>
-              <Card.Text>
-                <strong>Name:</strong> {cart.shippingAddress.fullName}
-                <br />
-                <strong>Address:</strong> {cart.shippingAddress.address},
-                {cart.shippingAddress.city},{cart.shippingAddress.postCode},
-                {cart.shippingAddress.country}
-              </Card.Text>
-              <Link to='/shipping'>Edit</Link>
-            </Card.Body>
-          </Card>
-          <Card className='mb-3'>
-            <Card.Body>
-              <Card.Title>Payment</Card.Title>
-              <Card.Text>
-                <strong>Method:</strong> {cart.paymentMethod}
-              </Card.Text>
-              <Link to='/payment'>Edit</Link>
-            </Card.Body>
-          </Card>
-          <Card className='mb-3'>
-            <Card.Body>
-              <Card.Title>Items</Card.Title>
-              <ListGroup variant='flush'>
-                {cart.cartItems.map((item) => (
-                  <ListGroup.Item key={item._id}>
-                    <Row className='align-items-center'>
-                      <Col md={6}>
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className='img-fluid rounded img-thumbnail'
-                        ></img>{' '}
-                        <Link to={`/product/${item.slug}`}>{item.name}</Link>
-                      </Col>
+      <h1 className='title'>Preview Order</h1>
+      <div className='order-details-row'>
+        <div className='order-details'>
+          <div className='order-shipping div-bg'>
+            <h5>Shipping</h5>
+            <p>
+              <strong>Name: </strong>
+              {` ${cart.shippingAddress.fullName}`}
+              <br />
+              <strong>Address:</strong>
+              {` ${cart.shippingAddress.address}, ${cart.shippingAddress.city}, ${cart.shippingAddress.postCode}, ${cart.shippingAddress.country}`}
+            </p>
+            <Link to='/shipping'>
+              <ins>Edit</ins>
+            </Link>
+          </div>
 
-                      <Col md={3}>
-                        <span>{item.quantity}</span>
-                      </Col>
-                      <Col md={3}>
-                        <span>£{item.price}</span>
-                      </Col>
-                    </Row>
-                  </ListGroup.Item>
-                ))}
-              </ListGroup>
-              <Link to='/cart'>Edit Cart</Link>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col md={4}>
-          <Card className='mb-3'>
-            <Card.Body>
-              <Card.Title>Order Summary</Card.Title>
-              <ListGroup variant='flush'>
-                <ListGroup.Item>
-                  <Row>
-                    <Col>Item</Col>
-                    <Col>£{cart.itemsPrice.toFixed(2)}</Col>
-                  </Row>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Row>
-                    <Col>Shipping</Col>
-                    <Col>£{cart.shippingPrice.toFixed(2)}</Col>
-                  </Row>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Row>
-                    <Col>Tax</Col>
-                    <Col>£{cart.taxPrice.toFixed(2)}</Col>
-                  </Row>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Row>
-                    <Col>
-                      <strong>XOrder Total</strong>
-                    </Col>
-                    <Col>
-                      <strong>£{cart.totalPrice.toFixed(2)}</strong>
-                    </Col>
-                  </Row>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <div className='d-grid'>
-                    <Button
-                      type='button'
-                      onClick={placeOrderHandler}
-                      disabled={cart.cartItems.length === 0}
-                    >
-                      Place Order
-                    </Button>
-                    {loading && <LoadingBox></LoadingBox>}
-                  </div>
-                </ListGroup.Item>
-              </ListGroup>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+          <div className='order-shipping div-bg'>
+            <h5>Payment</h5>
+            <p>
+              <strong>Method:</strong> {`${cart.paymentMethod}`}
+            </p>
+            <Link to='/payment'>
+              <ins>Edit</ins>
+            </Link>
+          </div>
+        </div>
+
+        <div className='order-summary col-4 div-bg'>
+          <h5>Order Summary</h5>
+          <div className='row'>
+            <div className='col-5'>Item</div>
+            <div className='col-5'>£{cart.itemsPrice.toFixed(2)}</div>
+          </div>
+          <div className='row'>
+            <div className='col-5'>Shipping</div>
+            <div className='col-5'>£{cart.shippingPrice.toFixed(2)}</div>
+          </div>
+          <div className='row'>
+            <div className='col-5'>Tax</div>
+            <div className='col-5'>£{cart.taxPrice.toFixed(2)}</div>
+          </div>
+          <div className='row'>
+            <div className='col-5'>
+              <strong>Order Total</strong>
+            </div>
+            <div className='col-5'>
+              <strong>£{cart.totalPrice.toFixed(2)}</strong>
+            </div>
+          </div>
+          <div className='d-grid'>
+            <button
+              type='button'
+              onClick={placeOrderHandler}
+              disabled={cart.cartItems.length === 0}
+            >
+              Place Order
+            </button>
+            {loading && <LoadingBox></LoadingBox>}
+          </div>
+        </div>
+      </div>
+      <div className='order-list-items div-bg'>
+        <h5>Items</h5>
+        <Link to='/cart'>
+          <ins>Edit Cart</ins>
+        </Link>
+        {cart.cartItems.map((item) => (
+          <div className='order-row' key={item._id}>
+            <div className='col-5'>
+              <Link to={`/product/${item.slug}`}>
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className='img-fluid rounded img-thumbnail'
+                ></img>
+              </Link>
+            </div>
+            <div className='item-name col-3'>
+              <Link to={`/product/${item.slug}`}>{item.name}</Link>
+            </div>
+
+            <div className='col-2'>
+              <span>{item.quantity}</span>
+            </div>
+            <div className='col-2'>
+              <span>£{item.price}</span>
+            </div>
+            {/* <hr /> */}
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

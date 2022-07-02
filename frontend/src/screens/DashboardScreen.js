@@ -49,7 +49,7 @@ export const DashboardScreen = () => {
       <Helmet>
         <title>Dashboard</title>
       </Helmet>
-      <h1>Dashboard</h1>
+      <h1 className='title'>Dashboard</h1>
       {loading ? (
         <LoadingBox />
       ) : error ? (

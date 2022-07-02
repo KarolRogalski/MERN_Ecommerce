@@ -1,8 +1,5 @@
 import axios from 'axios'
 import React, { useContext, useEffect, useReducer, useState } from 'react'
-import Button from 'react-bootstrap/Button'
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
 import { Helmet } from 'react-helmet-async'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -167,27 +164,24 @@ export const ProductListScreen = () => {
       <Helmet>
         <title>Admin -products</title>
       </Helmet>
-      <div className='row'>
-        <div className='col-5'>
-          <h1>Products</h1>
-        </div>
-        <div className='col-5'>
-          <div>
-            <button type='button' onClick={createHandler}>
-              Create Product
-            </button>
-          </div>
-        </div>
 
-        <label>
+      <h1 className='title'>Products</h1>
+
+      <div className='product-search-row div-bg'>
+        <label className='label'>
           <input
+            required
             type='text'
             placeholder='e.g. spider'
             onChange={(e) => searchHandler(e.target.value)}
           />
           <span>Search</span>
           <span className='box-underline'></span>
+          <i className='search-icon fas fa-search'></i>
         </label>
+        <button className='product-creat-btn' onClick={createHandler}>
+          Create Product
+        </button>
       </div>
       {loadingCreate && <LoadingBox />}
       {loadingDelete && <LoadingBox />}

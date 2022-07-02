@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/esm/Button'
 import { Store } from '../Store'
 import { useNavigate } from 'react-router-dom'
 import CheckoutSteps from '../components/CheckoutSteps'
@@ -57,54 +56,69 @@ export default function ShippingAddressScreen() {
       </Helmet>
       <CheckoutSteps step1 step2></CheckoutSteps>
       <div className='container small-container'>
-        <h1 className='my-3'>Shipping Address</h1>
-        <Form onSubmit={submitHandler}>
-          <Form.Group className='mb-3' controlId='fullName'>
-            <Form.Label>Full Name</Form.Label>
-            <Form.Control
+        <h1 className='title'>Shipping Address</h1>
+        <form className='div-bg' onSubmit={submitHandler}>
+          <label className='label'>
+            <input
+              type='text'
               value={fullName}
               required
+              placeholder='e.g. Joe Dow'
               onChange={(e) => setFullName(e.target.value)}
             />
-          </Form.Group>
-          <Form.Group className='mb-3' controlId='address'>
-            <Form.Label>Address</Form.Label>
-            <Form.Control
+            <span>Full Name</span>
+            <span className='box-underline'></span>
+          </label>
+          <label className='label'>
+            <input
+              type='text'
               value={address}
               required
+              placeholder='e.g. 1 London Road'
               onChange={(e) => setAddress(e.target.value)}
             />
-          </Form.Group>
-          <Form.Group className='mb-3' controlId='city'>
-            <Form.Label>City</Form.Label>
-            <Form.Control
+            <span>Address</span>
+            <span className='box-underline'></span>
+          </label>
+          <label className='label'>
+            <input
+              type='text'
               value={city}
               required
+              placeholder='e.g. London'
               onChange={(e) => setCity(e.target.value)}
             />
-          </Form.Group>
-          <Form.Group className='mb-3' controlId='postCode'>
-            <Form.Label>post Code</Form.Label>
-            <Form.Control
+            <span>City</span>
+            <span className='box-underline'></span>
+          </label>
+          <label className='label'>
+            <input
+              type='text'
               value={postCode}
               required
+              placeholder='e.g. SE1 6LN'
               onChange={(e) => setPostCode(e.target.value)}
             />
-          </Form.Group>
-          <Form.Group className='mb-3' controlId='country'>
-            <Form.Label>Country</Form.Label>
-            <Form.Control
+            <span>Postcode</span>
+            <span className='box-underline'></span>
+          </label>
+          <label className='label'>
+            <input
+              type='text'
               value={country}
               required
+              placeholder='e.g. UK'
               onChange={(e) => setCountry(e.target.value)}
             />
-          </Form.Group>
+            <span>Country</span>
+            <span className='box-underline'></span>
+          </label>
           <div className='mb-3'>
-            <Button variant='primary' type='submit'>
+            <button variant='primary' type='submit'>
               Continue
-            </Button>
+            </button>
           </div>
-        </Form>
+        </form>
       </div>
     </div>
   )

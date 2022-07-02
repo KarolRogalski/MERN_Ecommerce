@@ -6,7 +6,7 @@ import { Store } from '../Store'
 import { getError } from '../utils'
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+
 import { Helmet } from 'react-helmet-async'
 import LoadingBox from '../components/LoadingBox'
 import MessageBox from '../components/MessageBox'
@@ -91,7 +91,7 @@ export const UserEditScreen = () => {
       <Helmet>
         <title>Edit User {userId}</title>
       </Helmet>
-      <h1>Edit User {userId}</h1>
+      <h1 className='title'>Edit User {userId}</h1>
       {loading ? (
         <LoadingBox />
       ) : error ? (
@@ -125,9 +125,9 @@ export const UserEditScreen = () => {
           />
 
           <div className='mb-3'>
-            <Button disabled={loadingUpdate} type='submit'>
+            <button disabled={loadingUpdate} type='submit'>
               Update
-            </Button>
+            </button>
             {loadingUpdate && <LoadingBox />}
           </div>
         </Form>

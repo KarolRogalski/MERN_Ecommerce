@@ -1,0 +1,88 @@
+.order-details-row
+    display: flex
+    flex-wrap: wrap
+    width: 100%
+    justify-content: space-between
+    align-content: center
+    padding: 0
+    margin: 0
+
+.order-details
+    width: 65%
+    align-content: center
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+
+.order-shipping
+    display: flex
+    flex-direction: column
+    width: 100%
+    padding: 1rem
+    margin-bottom: 2rem
+    ins
+        color: $color-green
+        color: white
+        cursor: pointer
+        transition: 0.5s
+        &:hover
+            color: $color-green
+.order-summary
+    padding: 1rem
+    margin-bottom: 2rem
+    h5
+        margin-bottom: 1rem
+    button
+        margin-top: 1rem
+
+    .col-5
+        align-items: flex-start
+.order-list-items
+    display: flex
+    justify-content: space-between
+    align-items: center
+    flex-wrap: wrap
+    padding: 1rem
+    margin-bottom: 1rem
+    img
+        max-height: 5rem
+    ins
+        color: $color-green
+        color: white
+        cursor: pointer
+        transition: 0.5s
+        &:hover
+            color: $color-green
+.order-row
+    width: 100%
+    display: flex
+    justify-content: space-between
+    align-items: center
+    border-top: 1px solid $color-orange
+    padding: 0.5rem
+    &:first-of-type
+        border-top: 3px solid $color-orange
+
+@media all and (max-width:900px)
+    .order-details-row
+        justify-content: center
+    .order-details
+        width: 90%
+    .order-summary
+        width: 60%
+        margin-bottom: 1.5rem
+@media all and (max-width:540px)
+    .order-details-row
+        justify-content: center
+    .order-details
+        width: 100%
+    .order-summary
+        width: 90%
+@media all and (max-width:480px)
+    .order-row
+        flex-wrap: wrap
+    .item-name
+        order: -1
+        width: 100%
+        text-decoration: underline

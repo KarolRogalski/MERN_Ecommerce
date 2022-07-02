@@ -39,7 +39,7 @@ export const isAdmin = (req, res, next) => {
 }
 
 export const payOrderEmailTemplate = (order) => {
-  return ` <h1> Thanks for shopping wit us</h1>
+  return ` <h1 className='title'> Thanks for shopping wit us</h1>
   <p>Hi ${order.user.name},</p>
   <p>We have finished processing your order.</p>
   <h2>[Order: ${order._id}] (${order.createdAt

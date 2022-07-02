@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useContext, useReducer, useState } from 'react'
-import Button from 'react-bootstrap/Button'
+
 import Form from 'react-bootstrap/Form'
 import { Helmet } from 'react-helmet-async'
 import { toast } from 'react-toastify'
@@ -35,6 +35,12 @@ export const ProfileScreen = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault()
+    if (password !== confirmPassword) {
+      toast.error('Passwords do not match')
+      setConfirmPassword('')
+      setPassword('')
+      return
+    }
     try {
       dispatch({ type: 'UPDATE_REQUESR' })
       const { data } = await axios.put(
@@ -63,7 +69,54 @@ export const ProfileScreen = () => {
         <title>User Profile</title>
       </Helmet>
       <h1 className='my-3'>User Profile</h1>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={submitHandler} className='div-bg'>
+        <label className='label'>
+          <input
+            value={name}
+            required
+            type='text'
+            placeholder='e.g. Joe Dow'
+            onChange={(e) => setName(e.target.value)}
+          />
+          <span>Name</span>
+          <span className='box-underline'></span>
+        </label>
+        <label className='label'>
+          <input
+            value={email}
+            required
+            type='email'
+            placeholder='e.g. joedow@gemail.com'
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <span>Email</span>
+          <span className='box-underline'></span>
+        </label>
+        <label className='label'>
+          <input
+            value={password}
+            required
+            type='password'
+            placeholder='e.g. my-secret-password'
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <span>Pasword</span>
+          <span className='box-underline'></span>
+        </label>
+        <label className='label'>
+          <input
+            value={confirmPassword}
+            required
+            type='password'
+            placeholder='e.g. my-secret-password'
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+          <span>Confirm Pasword</span>
+          <span className='box-underline'></span>
+        </label>
+        <button type='submit'>Update</button>
+      </form>
+      {/* <form onSubmit={submitHandler}>
         <Form.Group className='mb-3' controlId='name'>
           <Form.Label>Name</Form.Label>
           <Form.Control
@@ -98,9 +151,9 @@ export const ProfileScreen = () => {
           />
         </Form.Group>
         <div className='mb-3'>
-          <Button type='submit'>Update</Button>
+          <button type='submit'>Update</button>
         </div>
-      </form>
+      </form> */}
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Button from 'react-bootstrap/Button'
+import button from 'react-bootstrap/button'
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import InputGroup from 'react-bootstrap/InputGroup'
@@ -13,21 +13,19 @@ export const Searchbox = () => {
     navigate(query ? `search/?query=${query}` : '/search')
   }
   return (
-    <Form className='d-flex me-auto' onSubmit={submitHandler}>
-      <InputGroup>
-        <FormControl
+    <form className='search-component' onSubmit={submitHandler}>
+      <label className='label'>
+        <input
           type='text'
-          name='q'
-          id='q'
+          placeholder='e.g. spider'
           onChange={(e) => setQuery(e.target.value)}
-          placecholder='search products'
-          aria-label='Serch Products'
-          aria-describedby='button-search'
-        ></FormControl>
-        <Button variant='outline-primary' type='submit' id='button-search'>
+        />
+        <span>Search</span>
+        <span className='box-underline'></span>
+        <button className='search-btn' type='submit'>
           <i className='fas fa-search'></i>
-        </Button>
-      </InputGroup>
-    </Form>
+        </button>
+      </label>
+    </form>
   )
 }

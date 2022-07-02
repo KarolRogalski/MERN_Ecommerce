@@ -14,7 +14,6 @@ import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import Button from 'react-bootstrap/Button'
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -311,9 +310,9 @@ export const OrderScreen = () => {
                   <ListGroup.Item>
                     {loadingDeliver && <LoadingBox />}
                     <div className='d-grid'>
-                      <Button type='button' onClick={deliverOrderHandler}>
+                      <button type='button' onClick={deliverOrderHandler}>
                         Deliver Order
-                      </Button>
+                      </button>
                     </div>
                   </ListGroup.Item>
                 )}

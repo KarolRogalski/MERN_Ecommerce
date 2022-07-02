@@ -30,27 +30,25 @@ h2
     width: 100%
     min-height: 87vh
     max-width: 1200px
-    padding: 1rem 0.5rem 1rem 0.5rem
+    padding: 1rem 0.5rem 0 0.5rem
 .div-bg
     background: $color-bg
     background-image: url('/public/images/bg.png')
     background-size: cover
+    border-radius: 0.5rem
 .products
     display: grid
     grid-template-columns: repeat(auto-fill, 23%)
-    grid-gap: 1rem
     justify-content: space-between
+    row-gap: 1rem
+    margin-bottom: 1rem
 @media all and (max-width:900px)
     .products
         grid-template-columns: repeat(auto-fill, 31%)
 @media all and (max-width:600px)
     .products
         grid-template-columns: repeat(auto-fill, 48%)
-
-.table-wrap
-    max-width: 100%
-    overflow-x: auto
-    white-space: nowrap
+        gap: 2vw
 
 .footer
     height: 3.5rem
@@ -75,6 +73,8 @@ button
         background: lighten(#759819,10 )
         box-shadow: inset 0px 0px 7px 2px white
         color: $color-bg
+        // // background: transparent
+        // box-shadow: inset 0px 0px 7px 2px $color-orange
     &:hover > i
         color: lighten(#426809, 30)
     &:focus
@@ -121,7 +121,7 @@ a
         color: lighten($color-dark-green, 30)
 
 .title
-    margin-bottom: 1rem
+    margin: 1rem 0
 
 .row
     display: flex
@@ -131,7 +131,8 @@ a
     align-content: center
     padding: 0
     margin: 0
-.col-9, .col-8, .col-7,.col-6,.col-5, .col-4, .col-3 ,.col-2, .col-1
+.col-12,.col-9, .col-8, .col-7,.col-6,.col-5, .col-4, .col-3 ,.col-2, .col-1
+    width: 100%
     padding: 0.5rem
     align-content: center
     display: flex
@@ -149,7 +150,7 @@ a
 .col-5
     width: calc(41.66% - 1rem )
 .col-4
-    width: calc( 33.33 - 1rem )
+    width: calc( 33.33% - 1rem )
 .col-3
     width: calc( 25% - 0.5rem )
 .col-2
@@ -160,3 +161,8 @@ a
     padding: 0
     width: 30px
     height: 30px
+    background: transparent
+    &:hover
+        background: transparent
+        box-shadow: inset 0px 0px 7px 2px $color-orange
+        // color: $color-bg

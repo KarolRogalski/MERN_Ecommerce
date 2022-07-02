@@ -12,7 +12,7 @@ import Col from 'react-bootstrap/Col'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Card from 'react-bootstrap/Card'
 import Badge from 'react-bootstrap/Badge'
-import Button from 'react-bootstrap/Button'
+
 import Form from 'react-bootstrap/Form'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import { Helmet } from 'react-helmet-async'
@@ -141,7 +141,7 @@ function ProductScreen() {
           </div>
         </div>
         <div className='product-details'>
-          <h1>{product.name}</h1>
+          <h1 className='title'>{product.name}</h1>
           <Rating
             rating={product.rating}
             numReviews={product.numReviews}

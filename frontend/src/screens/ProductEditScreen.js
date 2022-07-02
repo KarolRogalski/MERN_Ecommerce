@@ -9,7 +9,7 @@ import MessageBox from '../components/MessageBox'
 import Container from 'react-bootstrap/Container'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+
 import { toast } from 'react-toastify'
 
 const reducer = (state, action) => {
@@ -154,7 +154,7 @@ export const ProductEditScreen = () => {
       <Helmet>
         <title>Product Edit ${productId}</title>
       </Helmet>
-      <h1>Edit Product ${productId}</h1>
+      <h1 className='title'>Edit Product ${productId}</h1>
       {loading ? (
         <LoadingBox />
       ) : error ? (
@@ -206,9 +206,9 @@ export const ProductEditScreen = () => {
               {images.map((x) => (
                 <ListGroup.Item key={x}>
                   {x}
-                  <Button variant='light' onClick={() => deleteFileHandler(x)}>
+                  <button variant='light' onClick={() => deleteFileHandler(x)}>
                     <i className='fa fa-times-circle'></i>
-                  </Button>
+                  </button>
                 </ListGroup.Item>
               ))}
             </ListGroup>
@@ -256,9 +256,9 @@ export const ProductEditScreen = () => {
             />
           </Form.Group>
           <div className='mb-3'>
-            <Button disabled={loadingUpdate} type='submit'>
+            <button disabled={loadingUpdate} type='submit'>
               Update
-            </Button>
+            </button>
             {loadingUpdate && <LoadingBox />}
           </div>
         </Form>

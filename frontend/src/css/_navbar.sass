@@ -1,0 +1,160 @@
+.navbar
+    display: flex
+    justify-content: center
+    align-items: center
+    border-radius: 0
+    ul
+        box-sizing: border-box
+        padding: 0
+        margin: 0
+        list-style: none
+        color: $color-orange
+        display: flex
+    li
+        box-sizing: border-box
+        height: 3rem
+        line-height: 3rem
+        text-align: center
+        padding: 0 1rem
+        cursor: pointer
+        transition: all 500ms ease-in-out
+        z-index: 5
+    li, a
+        display: inline-block
+        &:focus
+            outline: 0
+.navbar-row
+    display: flex
+    max-width: 1200px
+    width: 100%
+    justify-content: space-between
+    align-items: center
+    padding-right: 3rem
+.nav-right-panel
+    display: flex
+    width: 250px
+    justify-content: space-between
+
+    a
+        color: $color-orange
+.cart-items-number
+    display: inline-block
+    border-radius: 50%
+    padding: 0.35em 0.65em
+    margin-left: 0.25rem
+    font-size: .75em
+    font-weight: 700
+    line-height: 1
+    color: white
+    background: red
+    text-align: center
+    white-space: nowrap
+    vertical-align: baseline
+    border-radius: 50%
+.menu-item
+    &::after
+        display: inline-block
+        margin-left: 0.255em
+        vertical-align: 0.255em
+        content: ""
+        border-top: 0.3em solid
+        border-right: 0.3em solid transparent
+        border-bottom: 0
+        border-left: 0.3em solid transparent
+
+.drop-menu
+    position: absolute
+    top: 100%
+    left: 0
+    flex-direction: column
+    z-index: 5
+    background: transparent
+    &:after
+        content: ''
+        position: absolute
+        display: block
+        top: 0
+        width: 0
+        right: 0rem
+        height: 2px
+        background: $color-bg
+        transition: all 300ms linear
+    .drop-menu-item
+        display: none
+        background: darken($color-bg, 3)
+        // border-bottom: 2px solid $second-color
+        &:last-child
+            border-bottom: 2px solid $color-orange
+            border-bottom: none
+        a
+            font-size: 1rem
+        //     &:after
+        //         display: none
+        &:hover
+            background: lighten($color-bg, 10)
+        &.top-break-line
+            border-top: 1px solid $color-orange
+    .drop-menu-item.active:after
+        display: none
+
+.menu-item
+    position: relative
+    &:hover > ul.drop-menu
+        perspective: 1000px
+        &:after
+            width: 100%
+            left: 0
+        li
+            display: block
+            height: 3rem
+            line-height: 3rem
+            opacity: 0
+            transition: 1s
+            color: red
+            @for $i from 1 through 9
+                &:nth-child(#{$i})
+                    animation:
+                        name: menu-animation
+                        duration: 500ms
+                        delay: 250ms * ($i - 1)
+                        timing-function: ease-in-out
+                        fill-mode: forwards
+
+@keyframes menu-animation
+    0%
+        opacity: 0
+        transform: rotateY(-90deg) translateY(30px)
+    100%
+        opacity: 1
+        transform: rotateY(0deg) translateY(0)
+
+@media all and (max-width: 769px)
+    .navigation
+        li:hover
+            overflow: visible
+            height: auto
+            max-height: 99rem
+        li.menu-item.active
+            transform: scale(1)
+    .drop-menu
+        position: relative
+        top: 0
+        left: 0
+        width: 100%
+        .drop-menu-item
+            height: 3rem
+            line-height: 3rem
+            display: block
+            animation: none
+            opacity: 0
+            transform: translate(100%,0)
+            &:before
+                content: ''
+                position: absolute
+                top: 0
+                left: 25%
+                right: 25%
+                height: 2px
+                background: $color-bg
+            &.top-break-line
+                border-top: 0px solid $color-orange
