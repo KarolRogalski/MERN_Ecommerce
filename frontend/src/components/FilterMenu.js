@@ -83,19 +83,19 @@ export const FilterMenu = (props) => {
     fetchData()
   }, [category, error, order, page, price, query, rating])
 
-  const [categories, setCategories] = useState([])
+  // const [categories, setCategories] = useState([])
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const { data } = await axios.get(`api/products/categories`)
-        setCategories(data)
-      } catch (err) {
-        toast.error(getError(err))
-      }
-    }
-    fetchCategories()
-  }, [dispatch])
+  // useEffect(() => {
+  //   const fetchCategories = async () => {
+  //     try {
+  //       const { data } = await axios.get(`api/products/categories`)
+  //       setCategories(data)
+  //     } catch (err) {
+  //       toast.error(getError(err))
+  //     }
+  //   }
+  //   fetchCategories()
+  // }, [dispatch])
 
   const getFilterUrl = (filter) => {
     const filterPage = filter.page || page
@@ -108,7 +108,7 @@ export const FilterMenu = (props) => {
     return `/search?page=${filterPage}&query=${filterQuery}&category=${filterCategory}&price=${filterPrice}&rating=${filterRating}&order=${filterOrder}`
   }
   const { state, dispatch: ctxDispatch } = useContext(Store)
-  const { filterMenuIsOpen } = state
+  const { filterMenuIsOpen, categories } = state
   const filterMenuHandler = () => {
     ctxDispatch({ type: 'FILTER_MENU', payload: !filterMenuIsOpen })
   }

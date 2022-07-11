@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useReducer, useState } from 'react'
+import React, { useContext, useReducer, useState } from 'react'
 import { useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
@@ -10,6 +10,7 @@ import LoadingBox from '../components/LoadingBox'
 import MessageBox from '../components/MessageBox'
 import Product from '../components/Product'
 import { Searchbox } from '../components/Searchbox'
+import { Store } from '../Store'
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -58,6 +59,8 @@ export const ratings = [
 ]
 
 export const SearchScreen = () => {
+  const { state } = useContext(Store)
+  const { categories } = state
   const navigate = useNavigate()
   const { search } = useLocation()
   const sp = new URLSearchParams(search)
@@ -87,20 +90,6 @@ export const SearchScreen = () => {
     }
     fetchData()
   }, [category, error, order, page, price, query, rating])
-
-  const [categories, setCategories] = useState([])
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const { data } = await axios.get(`api/products/categories`)
-        setCategories(data)
-      } catch (err) {
-        toast.error(getError(err))
-      }
-    }
-    fetchCategories()
-  }, [dispatch])
 
   const getFilterUrl = (filter) => {
     const filterPage = filter.page || page

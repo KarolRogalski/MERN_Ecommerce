@@ -112,17 +112,17 @@ hr {
   }
 }
 
-@media all and (max-width: 420px) {
+@media all and (max-width: 400px) {
   .products {
-    -ms-grid-columns: (100%)[auto-fill];
-        grid-template-columns: repeat(auto-fill, 100%);
-    gap: 2vw;
+    -ms-grid-columns: (90%)[auto-fill];
+        grid-template-columns: repeat(auto-fill, 90%);
+    gap: 1vw;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
   }
   .products .product-card {
-    max-width: 220px;
+    width: 220px;
     -ms-grid-column-align: center;
         justify-self: center;
   }
@@ -898,7 +898,7 @@ a:hover {
     top: 3rem;
     left: -110%;
     width: 100vw;
-    height: calc( 100vh - 3rem);
+    min-height: calc( 100vh - 3rem);
     padding: 1rem;
     background: rgba(26, 29, 33, 0.95);
     z-index: 10;
@@ -906,8 +906,6 @@ a:hover {
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
   }
   .mobile-menu .menu-item > ul.drop-menu li {
     margin-right: 200%;

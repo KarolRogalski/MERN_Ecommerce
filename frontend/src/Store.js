@@ -17,6 +17,7 @@ const initialState = {
       ? JSON.parse(localStorage.getItem('cartItems'))
       : [],
   },
+  categories: [],
   filterMenuIsOpen: false,
   mobileMenuIsOpen: false,
 }
@@ -31,6 +32,11 @@ function reducer(state, action) {
       return {
         ...state,
         filterMenuIsOpen: action.payload,
+      }
+    case 'SET_CATEGORIES':
+      return {
+        ...state,
+        categories: action.payload,
       }
     case 'CART_ADD_ITEM':
       //add to cart

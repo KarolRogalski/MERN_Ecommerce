@@ -39,7 +39,7 @@ export const ProductEditScreen = () => {
 
   const params = useParams()
   const { id: productId } = params
-  const { state } = useContext(Store)
+  const { state, dispatch: ctxDispatch } = useContext(Store)
   const { userInfo } = state
 
   const [{ loading, error, loadingUpdate, loadingUpload }, dispatch] =
@@ -105,10 +105,20 @@ export const ProductEditScreen = () => {
       )
       dispatch({ type: 'UPDATE_SUCCESS' })
       toast.success('Product update successfully')
+      fetchCategories()
       navigate('/admin/products')
     } catch (err) {
       toast.error(getError(err))
       dispatch({ type: 'UPDATE_FAIL' })
+    }
+  }
+  const fetchCategories = async () => {
+    console.log('cat app')
+    try {
+      const { data } = await axios.get(`/api/products/categories`)
+      ctxDispatch({ type: 'SET_CATEGORIES', payload: data })
+    } catch (err) {
+      toast.error(getError(err))
     }
   }
 
@@ -117,7 +127,7 @@ export const ProductEditScreen = () => {
     const bodyFormData = new FormData()
     bodyFormData.append('file', file)
     try {
-      dispatch({ type: 'UPLPAD_REQUEST' })
+      dispatch({ type: 'UPLOAD_REQUEST' })
 
       const { data } = await axios.post('/api/upload', bodyFormData, {
         headers: {
