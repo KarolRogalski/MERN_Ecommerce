@@ -29,6 +29,7 @@ export default function CartScreen() {
   const checkoutHandler = () => {
     navigate('/signin?redirect=/shipping')
   }
+
   return (
     <>
       <Helmet>
@@ -47,56 +48,49 @@ export default function CartScreen() {
           ) : (
             <>
               {cartItems.map((item) => (
-                <>
-                  <div className='cart-row-item' key={item._id}>
-                    <div className='item-img'>
-                      {' '}
-                      <Link to={`/product/${item.slug}`}>
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className='img-fluid img-thumbnail'
-                        ></img>
-                      </Link>
-                    </div>
-                    <div className='item-name'>
-                      <Link to={`/product/${item.slug}`}>{item.name}</Link>
-                    </div>
-                    <div className='item-quantity'>
-                      <button
-                        className='btn-icon'
-                        onClick={() =>
-                          updateCartHandler(item, item.quantity - 1)
-                        }
-                        disabled={item.quantity === 1}
-                      >
-                        <i className='fas fa-minus-circle'></i>
-                      </button>{' '}
-                      <span>{item.quantity}</span>{' '}
-                      <button
-                        className='btn-icon'
-                        onClick={() =>
-                          updateCartHandler(item, item.quantity + 1)
-                        }
-                        disabled={item.quantity === item.countInStock}
-                      >
-                        <i className='fas fa-plus-circle'></i>
-                      </button>
-                    </div>
-
-                    <div className='item-price'>£{item.price}</div>
-                    <div className='item-delete'>
-                      <button
-                        className='btn-icon'
-                        onClick={() => removeItemHandler(item)}
-                        variant='light'
-                      >
-                        <i className='fas fa-trash'></i>
-                      </button>
-                    </div>
+                <div className='cart-row-item' key={item._id}>
+                  <div className='item-img'>
+                    {' '}
+                    <Link to={`/product/${item.slug}`}>
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className='img-fluid img-thumbnail'
+                      ></img>
+                    </Link>
                   </div>
-                  <hr />
-                </>
+                  <div className='item-name'>
+                    <Link to={`/product/${item.slug}`}>{item.name}</Link>
+                  </div>
+                  <div className='item-quantity'>
+                    <button
+                      className='btn-icon'
+                      onClick={() => updateCartHandler(item, item.quantity - 1)}
+                      disabled={item.quantity === 1}
+                    >
+                      <i className='fas fa-minus-circle'></i>
+                    </button>{' '}
+                    <span>{item.quantity}</span>{' '}
+                    <button
+                      className='btn-icon'
+                      onClick={() => updateCartHandler(item, item.quantity + 1)}
+                      disabled={item.quantity === item.countInStock}
+                    >
+                      <i className='fas fa-plus-circle'></i>
+                    </button>
+                  </div>
+
+                  <div className='item-price'>£{item.price}</div>
+                  <div className='item-delete'>
+                    <button
+                      className='btn-icon'
+                      onClick={() => removeItemHandler(item)}
+                      variant='light'
+                    >
+                      <i className='fas fa-trash'></i>
+                    </button>
+                  </div>
+                </div>
               ))}
             </>
           )}

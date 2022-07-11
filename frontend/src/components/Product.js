@@ -41,7 +41,9 @@ function Product(props) {
         <Rating rating={product.rating} numReviews={product.numReviews} />
         <p>£{product.price}</p>
         {product.countInStock === 0 ? (
-          <button disabled>Out of Stock</button>
+          <button className='out-of-stock-btn' disabled>
+            Out of Stock
+          </button>
         ) : (
           <button onClick={() => addToCartHandler(product)}>
             Add{'\xa0'}to{'\xa0'}cart

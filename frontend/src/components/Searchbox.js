@@ -8,7 +8,8 @@ export const Searchbox = () => {
   const [query, setQuery] = useState('')
   const submitHandler = (e) => {
     e.preventDefault()
-    navigate(query ? `search/?query=${query}` : '/search')
+    console.log(query)
+    navigate(query ? `/search/?query=${query}` : '/search')
     ctxDispatch({ type: 'FILTER_MENU', payload: false })
   }
   return (

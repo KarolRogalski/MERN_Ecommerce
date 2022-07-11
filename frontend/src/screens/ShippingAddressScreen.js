@@ -57,7 +57,7 @@ export default function ShippingAddressScreen() {
       <CheckoutSteps step1 step2></CheckoutSteps>
       <div className='container small-container'>
         <h1 className='title'>Shipping Address</h1>
-        <form className='div-bg' onSubmit={submitHandler}>
+        <form className='small-container div-bg' onSubmit={submitHandler}>
           <label className='label'>
             <input
               type='text'

@@ -120,3 +120,11 @@
             width: 100%
 .rotate-180
     transform: translateY(-50%) rotate(180deg)
+@media all and (max-width:420px)
+    .search-row
+        justify-content: center
+        &::after
+            display: none
+        .product-card
+            width: 90%
+            max-width: 220px

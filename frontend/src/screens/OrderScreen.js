@@ -183,7 +183,7 @@ export const OrderScreen = () => {
     }
   }
   return loading ? (
-    <LoadingBox></LoadingBox>
+    <LoadingBox />
   ) : error ? (
     <MessageBox variant='danger'>{error}</MessageBox>
   ) : (

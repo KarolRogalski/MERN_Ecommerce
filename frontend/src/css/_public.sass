@@ -43,6 +43,15 @@ hr
     background-image: url('/public/images/bg.png')
     background-size: cover
     border-radius: 0.5rem
+.spinner
+    width: 100%
+.loading-spiner
+    height: 300px
+    width: 300px
+    margin: 2rem auto
+    background-size: cover
+    background-position: center
+    background-image: url('/public/images/global_loader.gif')
 .messageBox
     border: 1px solid white
     padding: 0.4rem 1rem
@@ -64,6 +73,14 @@ hr
     .products
         grid-template-columns: repeat(auto-fill, 48%)
         gap: 2vw
+@media all and (max-width:420px)
+    .products
+        grid-template-columns: repeat(auto-fill, 100%)
+        gap: 2vw
+        justify-content: center
+        .product-card
+            max-width: 220px
+            justify-self: center
 
 .footer
     margin-top: 2rem
@@ -104,6 +121,13 @@ button
         color: lighten(#426809, 30)
     &:focus
         outline: 0
+.out-of-stock-btn
+    background: lighten($color-bg, 30 )
+    color: white
+    &:hover
+        color: white
+        background: lighten($color-bg, 30 )
+        box-shadow: none
 
 .img-thumbnail
     padding: 0.15rem

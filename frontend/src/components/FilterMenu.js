@@ -108,9 +108,9 @@ export const FilterMenu = (props) => {
     return `/search?page=${filterPage}&query=${filterQuery}&category=${filterCategory}&price=${filterPrice}&rating=${filterRating}&order=${filterOrder}`
   }
   const { state, dispatch: ctxDispatch } = useContext(Store)
-  const { filerMenuIsOpen } = state
+  const { filterMenuIsOpen } = state
   const filterMenuHandler = () => {
-    ctxDispatch({ type: 'FILTER_MENU', payload: !filerMenuIsOpen })
+    ctxDispatch({ type: 'FILTER_MENU', payload: !filterMenuIsOpen })
   }
   return (
     <div

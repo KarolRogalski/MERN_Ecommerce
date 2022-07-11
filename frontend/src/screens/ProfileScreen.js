@@ -67,8 +67,8 @@ export const ProfileScreen = () => {
       <Helmet>
         <title>User Profile</title>
       </Helmet>
-      <h1 className='my-3'>User Profile</h1>
-      <form onSubmit={submitHandler} className='div-bg'>
+      <h1 className='title'>User Profile</h1>
+      <form onSubmit={submitHandler} className='small-container div-bg'>
         <label className='label'>
           <input
             value={name}

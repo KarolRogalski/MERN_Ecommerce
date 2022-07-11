@@ -10,6 +10,26 @@
     h5
         font-size: 1.3rem
         font-variant: small-caps
+
+.product-search-row
+    display: flex
+    width: 100%
+    justify-content: space-between
+    align-items: center
+    padding: 0
+    margin: 0
+    border-bottom: 2px solid #ff6224
+    border-bottom-left-radius: 0
+    border-bottom-right-radius: 0
+    .label
+        width: 60%
+        max-width: 400px
+        margin-right: 1.5rem
+.product-creat-btn
+    max-height: 3rem
+    margin-right: 1.5rem
+    margin-top: 1rem
+
 @media all and (max-width:600px)
     .dashboard-stats
         margin: 0 auto
@@ -20,19 +40,19 @@
             border-top: none
         &:last-child
             border-bottom: none
+    .product-search-row
+        .label
+            flex-grow: 1
+    .product-creat-btn
+        flex-shrink: 0
+        margin: 1rem 1rem 0 1rem
 
-.product-search-row
-    display: flex
-    flex-wrap: wrap
-    width: 100%
-    justify-content: space-between
-    align-items: center
-    padding: 0
-    margin: 0
-    border-bottom: 2px solid #ff6224
-    border-bottom-left-radius: 0
-    border-bottom-right-radius: 0
-.product-creat-btn
-    max-height: 3rem
-    margin-right: 1.5rem
-    margin-top: 1rem
+@media all and (max-width:400px)
+    .product-search-row
+        // flex-wrap: wrap
+        flex-direction: column
+        .label
+            width: 90%
+            order: 1
+    .product-creat-btn
+        margin: 1rem

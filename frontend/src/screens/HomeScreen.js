@@ -49,19 +49,18 @@ function HomeScreen() {
         <title>BuyBug</title>
       </Helmet>
       <h1 className='title'> Featured Products</h1>
-      <div className='products'>
-        {loading ? (
-          <LoadingBox />
-        ) : error ? (
-          <MessageBox variant='danger'>{error}</MessageBox>
-        ) : (
-          <>
-            {products.map((product) => (
-              <Product key={product._id} product={product}></Product>
-            ))}
-          </>
-        )}
-      </div>
+
+      {loading ? (
+        <LoadingBox />
+      ) : error ? (
+        <MessageBox variant='danger'>{error}</MessageBox>
+      ) : (
+        <div className='products'>
+          {products.map((product) => (
+            <Product key={product._id} product={product}></Product>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

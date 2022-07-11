@@ -65,7 +65,10 @@
     padding: 0.5rem
     &:first-of-type
         border-top: 3px solid $color-orange
-
+.item-name
+    max-height: 5rem
+    overflow: hidden
+    align-items: flex-start
 @media all and (max-width:900px)
     .order-details-row
         justify-content: center
@@ -73,6 +76,7 @@
         width: 90%
     .order-summary
         width: 60%
+        min-width: 400px
         margin-bottom: 1.5rem
 @media all and (max-width:540px)
     .order-details-row
@@ -80,7 +84,7 @@
     .order-details
         width: 100%
     .order-summary
-        width: 90%
+        width: 100%
 @media all and (max-width:480px)
     .order-row
         flex-wrap: wrap

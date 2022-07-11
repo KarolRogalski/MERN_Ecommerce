@@ -17,15 +17,20 @@ const initialState = {
       ? JSON.parse(localStorage.getItem('cartItems'))
       : [],
   },
-  filerMenuIsOpen: false,
+  filterMenuIsOpen: false,
+  mobileMenuIsOpen: false,
 }
 function reducer(state, action) {
   switch (action.type) {
-    case 'FILTER_MENU':
-      console.log(action.payload)
+    case 'MOBILE_MENU':
       return {
         ...state,
-        filerMenuIsOpen: action.payload,
+        mobileMenuIsOpen: action.payload,
+      }
+    case 'FILTER_MENU':
+      return {
+        ...state,
+        filterMenuIsOpen: action.payload,
       }
     case 'CART_ADD_ITEM':
       //add to cart
