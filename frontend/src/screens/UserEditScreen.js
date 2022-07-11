@@ -4,8 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { Store } from '../Store'
 import { getError } from '../utils'
-import Container from 'react-bootstrap/Container'
-import Form from 'react-bootstrap/Form'
 
 import { Helmet } from 'react-helmet-async'
 import LoadingBox from '../components/LoadingBox'
@@ -87,51 +85,59 @@ export const UserEditScreen = () => {
   }
 
   return (
-    <Container className='small-container'>
+    <div className='small-container'>
       <Helmet>
         <title>Edit User {userId}</title>
       </Helmet>
-      <h1 className='title'>Edit User {userId}</h1>
+      <h1 className='title'>Edit User</h1>
+      <h5> {userId}</h5>
       {loading ? (
         <LoadingBox />
       ) : error ? (
         <MessageBox variant='danger'>{error}</MessageBox>
       ) : (
-        <Form onSubmit={submitHandler}>
-          <Form.Group className='mb-3' controlId='name'>
-            <Form.Label>Name</Form.Label>
-            <Form.Control
+        <form onSubmit={submitHandler} className='small-container div-bg'>
+          <label className='label'>
+            <input
+              type='name'
               value={name}
+              required
+              placeholder='e.g. Joe Doe'
               onChange={(e) => setName(e.target.value)}
-              required
             />
-          </Form.Group>
-          <Form.Group className='mb-3' controlId='email'>
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              value={email}
+            <span>Name</span>
+            <span className='box-underline'></span>
+          </label>
+          <label className='label'>
+            <input
               type='email'
-              onChange={(e) => setEmail(e.target.value)}
+              value={email}
               required
+              placeholder='e.g. joedoe@email.com'
+              onChange={(e) => setEmail(e.target.value)}
             />
-          </Form.Group>
-          <Form.Check
-            className='mb-3'
-            type='checkbox'
-            id='isAdmin'
-            label='isAdmin'
-            checked={isAdmin}
-            onChange={(e) => setIsAdmin(e.target.value)}
-          />
+            <span>Email</span>
+            <span className='box-underline'></span>
+          </label>
+          <label className='label'>
+            <input
+              className='mb-2'
+              type='checkbox'
+              id='isAdmin'
+              checked={isAdmin}
+              onChange={(e) => setIsAdmin(!isAdmin)}
+            />
+            <span>Is Admin ?</span>
+          </label>
 
-          <div className='mb-3'>
+          <div className='mb-2'>
             <button disabled={loadingUpdate} type='submit'>
               Update
             </button>
             {loadingUpdate && <LoadingBox />}
           </div>
-        </Form>
+        </form>
       )}
-    </Container>
+    </div>
   )
 }

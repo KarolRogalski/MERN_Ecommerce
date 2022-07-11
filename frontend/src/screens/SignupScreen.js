@@ -1,6 +1,4 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import Container from 'react-bootstrap/Container'
-import Form from 'react-bootstrap/Form'
 
 import { Helmet } from 'react-helmet-async'
 import Axios from 'axios'
@@ -49,48 +47,66 @@ export default function SignupScreen() {
   }, [navigate, redirect, userInfo])
 
   return (
-    <Container className='small-container'>
+    <div className='small-container'>
       <Helmet>
         <title>Sign Up</title>
       </Helmet>
-      <h1 className='my-3'> Sign Up</h1>
-      <Form onSubmit={submitHandler}>
-        <Form.Group className='mb-3' controlId='name'>
-          <Form.Label>Name</Form.Label>
-          <Form.Control required onChange={(e) => setName(e.target.value)} />
-        </Form.Group>
-        <Form.Group className='mb-3' controlId='email'>
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            type='email'
+      <h1 className='title'> Sign Up</h1>
+      <form onSubmit={submitHandler} className='small-container div-bg'>
+        <label className='label'>
+          <input
+            type='name'
+            value={name}
             required
+            placeholder='e.g. Joe Doe'
+            onChange={(e) => setName(e.target.value)}
+          />
+          <span>Name</span>
+          <span className='box-underline'></span>
+        </label>
+        <label className='label'>
+          <input
+            type='email'
+            value={email}
+            required
+            placeholder='e.g. joedoe@email.com'
             onChange={(e) => setEmail(e.target.value)}
           />
-        </Form.Group>
-        <Form.Group className='mb-3' controlId='password'>
-          <Form.Label>Password</Form.Label>
-          <Form.Control
+          <span>Email</span>
+          <span className='box-underline'></span>
+        </label>
+        <label className='label'>
+          <input
             type='password'
+            value={password}
             required
+            placeholder='e.g. my_secret_password'
             onChange={(e) => setPassword(e.target.value)}
           />
-        </Form.Group>
-        <Form.Group className='mb-3' controlId='confirmPassword'>
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
+          <span>Password</span>
+          <span className='box-underline'></span>
+        </label>
+        <label className='label'>
+          <input
             type='password'
+            value={confirmPassword}
             required
+            placeholder='e.g. my_secret_password'
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
-        </Form.Group>
-        <div className='mb-3'>
+          <span>Confirm Password</span>
+          <span className='box-underline'></span>
+        </label>
+        <div className='mb-2'>
           <button type='submit'>Sign Up</button>
         </div>
-        <div className='mb-3'>
+        <div className='mb-2'>
           Already have an account?{' '}
-          <Link to={`/signin?redirect=${redirect}`}>Sign-In</Link>
+          <Link to={`/signin?redirect=${redirect}`}>
+            <ins>Sign-In</ins>
+          </Link>
         </div>
-      </Form>
-    </Container>
+      </form>
+    </div>
   )
 }

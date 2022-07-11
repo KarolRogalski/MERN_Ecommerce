@@ -7,14 +7,6 @@ import React, {
   useState,
 } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import ListGroup from 'react-bootstrap/ListGroup'
-import Card from 'react-bootstrap/Card'
-import Badge from 'react-bootstrap/Badge'
-
-import Form from 'react-bootstrap/Form'
-import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import { Helmet } from 'react-helmet-async'
 import Rating from '../components/Rating'
 import LoadingBox from '../components/LoadingBox'
@@ -115,120 +107,128 @@ function ProductScreen() {
     }
   }
 
-  return loading ? (
-    <LoadingBox />
-  ) : error ? (
-    <MessageBox variant='danger'>{error}</MessageBox>
-  ) : (
-    <div className='product-bg'>
-      <div className='product-main'>
-        <div className='product-images'>
-          <img
-            className='product-img-large'
-            src={selectedImage || product.image}
-            alt={product.name}
-          ></img>
-          <div className='product-img-small'>
-            {[product.image, ...product.images].map((x) => (
+  return (
+    <>
+      <Helmet>
+        <title>{product.name}</title>
+      </Helmet>
+
+      {loading ? (
+        <LoadingBox />
+      ) : error ? (
+        <MessageBox variant='danger'>{error}</MessageBox>
+      ) : (
+        <div className='product-bg'>
+          <div className='product-main'>
+            <div className='product-images'>
               <img
-                key={x}
-                className='img-thumbnail'
-                src={x}
+                className='product-img-large'
+                src={selectedImage || product.image}
                 alt={product.name}
-                onClick={() => setSelectedImage(x)}
               ></img>
-            ))}
+              <div className='product-img-small'>
+                {[product.image, ...product.images].map((x) => (
+                  <img
+                    key={x}
+                    className='img-thumbnail'
+                    src={x}
+                    alt={product.name}
+                    onClick={() => setSelectedImage(x)}
+                  ></img>
+                ))}
+              </div>
+            </div>
+            <div className='product-details'>
+              <h1 className='title'>{product.name}</h1>
+              <Rating
+                rating={product.rating}
+                numReviews={product.numReviews}
+              ></Rating>
+              <h2>
+                £{product.price}
+                {product.countInStock > 0 ? (
+                  <span className='product-stock success'>
+                    <strong>In&nbsp;Stock</strong>
+                  </span>
+                ) : (
+                  <span className='product-stock danger'>
+                    <strong>Unavailable</strong>
+                  </span>
+                )}
+              </h2>
+              <hr />
+              <p>{product.description} </p>
+              <button onClick={addToCartHandler} variant='primary'>
+                Add To Cart
+              </button>
+            </div>
+          </div>
+
+          <div className='product-reviews'>
+            <div className='reviews-wrap'>
+              <h2 ref={reviewRef}>Reviews</h2>
+              {product.reviews.length === 0 && (
+                <MessageBox>There is no review</MessageBox>
+              )}
+
+              {product.reviews.map((review, index) => (
+                <div className='single-review' key={review._id}>
+                  <strong>{review.name}</strong>
+                  <Rating rating={review.rating} caption=' '></Rating>
+                  <p>{review.createdAt.substring(0, 10)}</p>
+                  <p>{review.comment}</p>
+                  <hr
+                    className={
+                      product.reviews.length - 1 === index
+                        ? 'display-none'
+                        : 'display-block'
+                    }
+                  />
+                </div>
+              ))}
+            </div>
+            {userInfo ? (
+              <form onSubmit={submitHandler} className='rating-form div-bg'>
+                <h2>Write a customer review</h2>
+
+                <label htmlFor='rating'>Rating</label>
+                <select
+                  id='rating'
+                  value={rating}
+                  onChange={(e) => setRating(e.target.value)}
+                >
+                  <option value=''>Select...</option>
+                  <option value='1'>1-Poor</option>
+                  <option value='2'>2- Fair</option>
+                  <option value='3'>3- Good</option>
+                  <option value='4'>4- Very Good</option>
+                  <option value='5'>5- Excelent</option>
+                </select>
+                <label htmlFor='comment'>Comments</label>
+                <textarea
+                  type='text'
+                  id='comment'
+                  placeholder='Leave a comment here'
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                ></textarea>
+                <button disabled={loadingCreateReview} type='submit'>
+                  Submit
+                </button>
+              </form>
+            ) : (
+              <MessageBox>
+                Please{' '}
+                <Link to={`/signin?redirect=/product/${product.slug}`}>
+                  Sign In
+                </Link>{' '}
+                to write a review
+              </MessageBox>
+            )}
           </div>
         </div>
-        <div className='product-details'>
-          <h1 className='title'>{product.name}</h1>
-          <Rating
-            rating={product.rating}
-            numReviews={product.numReviews}
-          ></Rating>
-          <h2>
-            £{product.price}
-            {product.countInStock > 0 ? (
-              <span className='product-stock success'>
-                <strong>In&nbsp;Stock</strong>
-              </span>
-            ) : (
-              <span className='product-stock danger'>
-                <strong>Unavailable</strong>
-              </span>
-            )}
-          </h2>
-          <hr />
-          <p>{product.description} </p>
-          <button onClick={addToCartHandler} variant='primary'>
-            Add To Cart
-          </button>
-        </div>
-      </div>
-
-      <div className='product-reviews'>
-        <h2 ref={reviewRef}>Reviews</h2>
-
-        {product.reviews.length === 0 && (
-          <MessageBox>There is no review</MessageBox>
-        )}
-        <div className='reviews-wrap'>
-          {product.reviews.map((review, index) => (
-            <div className='single-review' key={review._id}>
-              <strong>{review.name}</strong>
-              <Rating rating={review.rating} caption=' '></Rating>
-              <p>{review.createdAt.substring(0, 10)}</p>
-              <p>{review.comment}</p>
-              <hr
-                className={
-                  product.reviews.length - 1 === index
-                    ? 'display-none'
-                    : 'display-block'
-                }
-              />
-            </div>
-          ))}
-        </div>
-        {userInfo ? (
-          <form onSubmit={submitHandler}>
-            <h2>Write a customer review</h2>
-
-            <label for='rating'>Rating</label>
-            <select
-              id='rating'
-              value={rating}
-              onChange={(e) => setRating(e.target.value)}
-            >
-              <option value=''>Select...</option>
-              <option value='1'>1-Poor</option>
-              <option value='2'>2- Fair</option>
-              <option value='3'>3- Good</option>
-              <option value='4'>4- Very Good</option>
-              <option value='5'>5- Excelent</option>
-            </select>
-            <label for='comment'>Comments</label>
-            <textarea
-              type='text'
-              id='comment'
-              placeholder='Leave a comment here'
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-            ></textarea>
-            <button disabled={loadingCreateReview} type='submit'>
-              Submit
-            </button>
-          </form>
-        ) : (
-          <MessageBox>
-            Please{' '}
-            <Link to={`/signin?redirect=/product/${product.slug}`}>
-              Sign In
-            </Link>{' '}
-            to write a review
-          </MessageBox>
-        )}
-      </div>
-    </div>
+      )}
+    </>
   )
 }
 

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
-import Form from 'react-bootstrap/Form'
+
 import { Store } from '../Store'
 import { useNavigate } from 'react-router-dom'
 import CheckoutSteps from '../components/CheckoutSteps'
@@ -113,7 +113,7 @@ export default function ShippingAddressScreen() {
             <span>Country</span>
             <span className='box-underline'></span>
           </label>
-          <div className='mb-3'>
+          <div className='mb-2'>
             <button variant='primary' type='submit'>
               Continue
             </button>

@@ -8,10 +8,7 @@ import LoadingBox from '../components/LoadingBox'
 import MessageBox from '../components/MessageBox'
 import { Store } from '../Store'
 import { getError } from '../utils'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Card from 'react-bootstrap/Card'
-import ListGroup from 'react-bootstrap/ListGroup'
+
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
@@ -194,132 +191,120 @@ export const OrderScreen = () => {
       <Helmet>
         <title>Order {orderId}</title>
       </Helmet>
-      <h1 className='my-3'>Order {orderId}</h1>
-      <div className='row'>
-        <Col md={8}>
-          <Card className='mb-3'>
-            <Card.Body>
-              <Card.Title>Shipping</Card.Title>
-              <Card.Text>
-                <strong>Name:</strong> {order.shippingAddress.fullName}
-                <br />
-                <strong>Address:</strong> {order.shippingAddress.address},{' '}
-                {order.shippingAddress.city}, {order.shippingAddress.postCode},{' '}
-                {order.shippingAddress.country}
-              </Card.Text>
-              {order.isDelivered ? (
-                <MessageBox variant='success'>
-                  Delivered at {order.deliveredAt.substring(0, 10)}{' '}
-                  {order.deliveredAt.substring(11, 16)}
-                </MessageBox>
+      <h1 className='title'>Order: </h1>
+      <h5>{orderId}</h5>
+      <div className='order-details-row'>
+        <div className='order-details'>
+          <div className='order-shipping div-bg'>
+            <h5>Shipping</h5>
+            <p>
+              <strong>Name:</strong> {order.shippingAddress.fullName}
+              <br />
+              <strong>Address:</strong> {order.shippingAddress.address},{' '}
+              {order.shippingAddress.city}, {order.shippingAddress.postCode},{' '}
+              {order.shippingAddress.country}
+            </p>
+            {order.isDelivered ? (
+              <MessageBox variant='success'>
+                Delivered at {order.deliveredAt.substring(0, 10)}{' '}
+                {order.deliveredAt.substring(11, 16)}
+              </MessageBox>
+            ) : (
+              <MessageBox variant='danger'>Not Delivered</MessageBox>
+            )}
+          </div>
+          <div className='order-shipping div-bg'>
+            <h5>Payment</h5>
+            <p>
+              <strong>Method:</strong> {order.paymentMethod}
+            </p>
+            {order.isPaid ? (
+              <MessageBox variant='success'>
+                Paid at {order.paidAt.substring(0, 10)}{' '}
+                {order.paidAt.substring(11, 16)}
+              </MessageBox>
+            ) : (
+              <MessageBox variant='danger'>Not Paid</MessageBox>
+            )}
+          </div>
+        </div>
+        <div className='order-summary col-4 div-bg'>
+          <h5>Order Summary</h5>
+          <div className='row'>
+            <div className='col-5'>Item</div>
+            <div className='col-5'>£{order.itemsPrice.toFixed(2)}</div>
+          </div>
+          <div className='row'>
+            <div className='col-5'>Shipping</div>
+            <div className='col-5'>£{order.shippingPrice.toFixed(2)}</div>
+          </div>
+          <div className='row'>
+            <div className='col-5'>Tax</div>
+            <div className='col-5'>£{order.taxPrice.toFixed(2)}</div>
+          </div>
+          <div className='row'>
+            <div className='col-5'>
+              <strong>Order Total</strong>
+            </div>
+            <div className='col-5'>
+              <strong>£{order.totalPrice.toFixed(2)}</strong>
+            </div>
+          </div>
+          <hr />
+          {!order.isPaid && (
+            <div className='d-grid'>
+              {isPending ? (
+                <LoadingBox />
               ) : (
-                <MessageBox variant='danger'>Not Delivered</MessageBox>
+                <div>
+                  <PayPalButtons
+                    createOrder={createOrder}
+                    onApprove={onApprove}
+                    onError={onError}
+                  ></PayPalButtons>
+                </div>
               )}
-            </Card.Body>
-          </Card>
-          <Card className='mb-3'>
-            <Card.Body>
-              <Card.Title>Payment</Card.Title>
-              <Card.Text>
-                <strong>Method:</strong> {order.paymentMethod}
-              </Card.Text>
-              {order.isPaid ? (
-                <MessageBox variant='success'>
-                  Paid at {order.paidAt.substring(0, 10)}{' '}
-                  {order.paidAt.substring(11, 16)}
-                </MessageBox>
-              ) : (
-                <MessageBox variant='danger'>Not Paid</MessageBox>
-              )}
-            </Card.Body>
-          </Card>
-          <Card className='mb-3'>
-            <Card.Body>
-              <Card.Title>Items</Card.Title>
-              <ListGroup variant='flush'>
-                {order.orderItems.map((item) => (
-                  <ListGroup.Item key={item._id}>
-                    <Row className='align-items-center'>
-                      <Col md={6}>
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className='img-fluid rounded img-thumbnail'
-                        ></img>{' '}
-                        <Link to={`/product/${item.slug}`}>{item.name}</Link>
-                      </Col>
-                      <Col mb='3'>
-                        <span>{item.quality}</span>
-                      </Col>
-                      <Col mb='3'>£{item.price}</Col>
-                    </Row>
-                  </ListGroup.Item>
-                ))}
-              </ListGroup>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col md={4}>
-          <Card className='mb-3'>
-            <Card.Body>
-              <Card.Title>Order Summary</Card.Title>
-              <ListGroup variant='flush'>
-                <ListGroup.Item>
-                  <Row>
-                    <Col>Items</Col>
-                    <Col>£{order.itemsPrice.toFixed(2)}</Col>
-                  </Row>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Row>
-                    <Col>Shipping</Col>
-                    <Col>£{order.shippingPrice.toFixed(2)}</Col>
-                  </Row>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Row>
-                    <Col>Tax</Col>
-                    <Col>£{order.taxPrice.toFixed(2)}</Col>
-                  </Row>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Row>
-                    <Col>Order Total</Col>
-                    <Col>
-                      <strong>£{order.totalPrice.toFixed(2)}</strong>
-                    </Col>
-                  </Row>
-                </ListGroup.Item>
-                {!order.isPaid && (
-                  <ListGroup.Item>
-                    {isPending ? (
-                      <LoadingBox />
-                    ) : (
-                      <div>
-                        <PayPalButtons
-                          createOrder={createOrder}
-                          onApprove={onApprove}
-                          onError={onError}
-                        ></PayPalButtons>
-                      </div>
-                    )}
-                    {loadingPay && <LoadingBox></LoadingBox>}
-                  </ListGroup.Item>
-                )}
-                {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
-                  <ListGroup.Item>
-                    {loadingDeliver && <LoadingBox />}
-                    <div className='d-grid'>
-                      <button type='button' onClick={deliverOrderHandler}>
-                        Deliver Order
-                      </button>
-                    </div>
-                  </ListGroup.Item>
-                )}
-              </ListGroup>
-            </Card.Body>
-          </Card>
-        </Col>
+              {loadingPay && <LoadingBox />}
+            </div>
+          )}
+          {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+            <div className='row'>
+              {loadingDeliver && <LoadingBox />}
+              <div className='d-grid'>
+                <button type='button' onClick={deliverOrderHandler}>
+                  Deliver Order
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className='order-list-items div-bg'>
+          <h5>Items</h5>
+
+          {order.orderItems.map((item) => (
+            <div className='order-row' key={item._id}>
+              <div className='col-5'>
+                <Link to={`/product/${item.slug}`}>
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className='img-fluid rounded img-thumbnail'
+                  ></img>
+                </Link>
+              </div>
+              <div className='item-name col-3'>
+                <Link to={`/product/${item.slug}`}>{item.name}</Link>
+              </div>
+              <div className='col-2'>
+                <span>{item.quantity}</span>
+              </div>
+              <div className='col-2' mb='3'>
+                £{item.price}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )

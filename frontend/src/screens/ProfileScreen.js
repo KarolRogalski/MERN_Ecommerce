@@ -1,7 +1,6 @@
 import axios from 'axios'
 import React, { useContext, useReducer, useState } from 'react'
 
-import Form from 'react-bootstrap/Form'
 import { Helmet } from 'react-helmet-async'
 import { toast } from 'react-toastify'
 import { Store } from '../Store'
@@ -117,7 +116,7 @@ export const ProfileScreen = () => {
         <button type='submit'>Update</button>
       </form>
       {/* <form onSubmit={submitHandler}>
-        <Form.Group className='mb-3' controlId='name'>
+        <Form.Group className='mb-2' controlId='name'>
           <Form.Label>Name</Form.Label>
           <Form.Control
             value={name}
@@ -125,7 +124,7 @@ export const ProfileScreen = () => {
             required
           />
         </Form.Group>
-        <Form.Group className='mb-3' controlId='email'>
+        <Form.Group className='mb-2' controlId='email'>
           <Form.Label>Email</Form.Label>
           <Form.Control
             type='email'
@@ -134,7 +133,7 @@ export const ProfileScreen = () => {
             required
           />
         </Form.Group>
-        <Form.Group className='mb-3' controlId='password'>
+        <Form.Group className='mb-2' controlId='password'>
           <Form.Label>Password</Form.Label>
           <Form.Control
             type='password'
@@ -142,7 +141,7 @@ export const ProfileScreen = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Form.Group className='mb-3' controlId='confirmPassword'>
+        <Form.Group className='mb-2' controlId='confirmPassword'>
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             type='password'
@@ -150,7 +149,7 @@ export const ProfileScreen = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </Form.Group>
-        <div className='mb-3'>
+        <div className='mb-2'>
           <button type='submit'>Update</button>
         </div>
       </form> */}

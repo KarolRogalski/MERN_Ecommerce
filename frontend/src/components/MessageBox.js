@@ -1,5 +1,9 @@
-import Alert from 'react-bootstrap/Alert'
-
 export default function MessageBox(props) {
-  return <Alert variant={props.variant || 'info'}>{props.children}</Alert>
+  return (
+    <div
+      className={props.variant ? `messageBox ${props.variant}` : 'messageBox'}
+    >
+      {props.children}
+    </div>
+  )
 }

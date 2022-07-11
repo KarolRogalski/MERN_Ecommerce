@@ -38,8 +38,11 @@ export default function CartScreen() {
       <div className='cart-row'>
         <div className='cart-col-items'>
           {cartItems.length === 0 ? (
-            <MessageBox>
-              Cart is empty. <Link to='/'>Go Shopping</Link>
+            <MessageBox variant='danger'>
+              Cart is empty.{' '}
+              <Link to='/'>
+                <ins>Go Shopping</ins>
+              </Link>
             </MessageBox>
           ) : (
             <>

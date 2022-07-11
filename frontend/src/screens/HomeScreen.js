@@ -1,7 +1,6 @@
 import { useEffect, useReducer, useState } from 'react'
 import axios from 'axios'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+
 import Product from '../components/Product'
 import { Helmet } from 'react-helmet-async'
 import LoadingBox from '../components/LoadingBox'

@@ -8,6 +8,7 @@ body {
 }
 .site-container{
   min-height: 100vh;
+  overflow: hidden;
 }
 main{
   flex: 1;
@@ -48,13 +49,16 @@ main{
 }
 .small-container{
   max-width: 600px;
+  margin: auto;
 }
 
 .checkout-steps > div{
   border-bottom: 0.2rem solid #a0a0a0;
   color: #a0a0a0;
+  width: 25%;
+  text-align: center;
 }
-.checkout-steps > div.active{
+.checkout-steps > div.checkout-step-active{
   border-bottom: 0.2rem solid #f08000;
   color: #f08000
 }
@@ -65,7 +69,7 @@ main{
 }
 .side-navbar{
 width: 240px;
-height: 100%;
+height: calc(100vh - 10rem);
 position: absolute;
 left: -300px;
 background-color: #100901;

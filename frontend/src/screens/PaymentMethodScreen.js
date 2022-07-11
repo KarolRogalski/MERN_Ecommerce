@@ -47,7 +47,7 @@ export const PaymentMethodScreen = () => {
                 checked={paymentMethodName === 'PayPal'}
                 onChange={(e) => setPaymentMethodName(e.target.value)}
               />
-              <label for='paypal'>Paypal</label>
+              <label htmlFor='paypal'>Paypal</label>
             </li>
             <li className='form-check-row'>
               <input
@@ -58,10 +58,10 @@ export const PaymentMethodScreen = () => {
                 checked={paymentMethodName === 'Stripe'}
                 onChange={(e) => setPaymentMethodName(e.target.value)}
               />
-              <label for='Stripe'>Stripe</label>
+              <label htmlFor='Stripe'>Stripe</label>
             </li>
           </ul>
-          <div className='mb-3'>
+          <div className='mb-2'>
             <button type='submit'>Continue</button>
           </div>
         </form>

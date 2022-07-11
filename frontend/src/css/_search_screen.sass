@@ -11,9 +11,17 @@
         margin-left: 0.5rem
         background: transparent
         border-radius: 50%
+        &:hover
+            background: transparent
+            box-shadow: none
+        &:hover > i
+            transition: 0.5s
+            font-size: 1.1rem
     .product-card
         width: 30%
         max-width: 280px
+    .search
+        display: none
 .search-result-row
     display: flex
     justify-content: space-between
@@ -65,6 +73,7 @@
         padding: 0.5rem
     .search-filter
         padding-left: 1rem
+        height: min-content
     .search-row-toggle
         position: relative
         display: block
@@ -72,16 +81,30 @@
         display: block
         position: absolute
         right: 0.5rem
-        top: 50%
+        top: 1rem
         transform: translateY(-50%)
         background: $color-bg
         border: 1px solid #fff
         transition: all 0.5s
-        padding: 1px 6px
+        padding: 1px 10px
+        &::after
+            display: inline-block
+            vertical-align: 0.2rem
+            content: ""
+            border-top: 0
+            border-right: 0.3rem solid transparent
+            border-bottom: 0.3rem solid white
+            border-left: 0.3rem solid transparent
     .search-row
         flex-wrap: wrap
+        .search
+            display: block
+            margin: 1.5rem auto
+            width: 80%
         .product-card
             width: 48%
+        .label
+            width: 100%
     .search-filter-hidden
         height: 3.5rem
 @media all and (max-width:600px)
@@ -91,6 +114,9 @@
         padding: 0
     .search-filter
         padding: 1rem
-
+@media all and (max-width:420px)
+    .search-row
+        .search
+            width: 100%
 .rotate-180
     transform: translateY(-50%) rotate(180deg)

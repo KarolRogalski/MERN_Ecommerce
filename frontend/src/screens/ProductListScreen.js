@@ -90,7 +90,7 @@ export const ProductListScreen = () => {
     } else {
       fetchData()
     }
-  }, [page, userInfo, successDelete])
+  }, [page, userInfo, successDelete, navigate])
 
   const createHandler = async () => {
     if (window.confirm('Are you sure to creatr?')) {
@@ -207,7 +207,11 @@ export const ProductListScreen = () => {
                 filteredItems.map((product) => (
                   <tr key={product._id}>
                     <td>{product._id}</td>
-                    <td>{product.name}</td>
+                    <td>
+                      <Link to={`/product/${product.slug}`}>
+                        {product.name}
+                      </Link>
+                    </td>
                     <td>{product.price}</td>
                     <td>{product.category}</td>
                     <td>{product.brand}</td>
@@ -237,7 +241,11 @@ export const ProductListScreen = () => {
                 products.map((product) => (
                   <tr key={product._id}>
                     <td>{product._id}</td>
-                    <td>{product.name}</td>
+                    <td>
+                      <Link to={`/product/${product.slug}`}>
+                        {product.name}
+                      </Link>
+                    </td>
                     <td>{product.price}</td>
                     <td>{product.category}</td>
                     <td>{product.brand}</td>

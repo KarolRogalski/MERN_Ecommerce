@@ -14,6 +14,7 @@ body
     width: 49%
     display: flex
     flex-direction: column
+    height: fit-content
 .product-img-large
     width: 100%
     height: auto
@@ -25,11 +26,11 @@ body
         background: transparent
         border: none
 .product-img-small
-    height: 6rem
     display: flex
     flex-wrap: wrap
     justify-content: flex-start
     img
+        height: 6rem
         max-width: 25%
         flex: 1 1 auto
         border-radius: 0
@@ -42,6 +43,8 @@ body
     width: 49%
     display: flex
     flex-direction: column
+    height: fit-content
+
     .rating
         margin: 2rem 0 2rem 0
     h2
@@ -72,11 +75,12 @@ body
     button
         margin-bottom: 1.5rem
 .product-reviews
-    margin: 3rem auto 2rem auto
+    margin: 3rem auto
     max-width: 95%
     h2
         margin: 1rem 0
     .reviews-wrap
+        padding: 1rem
         margin-bottom: 1rem
         border-radius: 1rem
         background: $color-bg

@@ -12,6 +12,7 @@
     min-width: 100%
     width: unset
     padding: 0.5rem
+    margin-bottom: 0.5rem
     &:not(caption) > * > *
         border-bottom: 1px solid white
     tr
@@ -44,17 +45,21 @@ select
     background: $color-bg
     height: 2rem
     border-radius: 0.25rem
+    padding: 0.5rem
 textarea
     background: $color-bg
     color: $color-orange
     display: block
     width: 100%
     border-radius: 0.25rem
-    height: 4.5rem
+    height: 8rem
     padding: 1rem
     resize: vertical
     margin-bottom: 1rem
     overflow: hidden
+    transition: 0.5s
+    &:focus, &:active
+        border-color: $color-green
 
 .label
     width: 35%
@@ -100,7 +105,10 @@ textarea
     background: transparent
     &:hover
         background: transparent
-        box-shadow: inset 0px 0px 7px 2px $color-orange
+        box-shadow: none
+    &:hover > i
+        transition: 0.5s
+        font-size: 1.2rem
 
 input
     position: relative
@@ -158,3 +166,86 @@ input
     input[type=radio] ~ label
         width: unset
         margin: 0
+input[type=checkbox]
+    height: 1.2rem
+    cursor: pointer
+    display: inline-block
+    width: 1.2rem
+    & ~span
+        font-size: 1.1rem
+        top: 0.1rem
+        left: 4rem
+.small-container
+    form
+        padding-top: 1.5rem
+
+form.small-container.edit-item
+    width: 100%
+    padding: 2rem 5%
+    padding-right: calc( 5% + 1.5rem )
+    .label
+        width: 100%
+
+    input:not(:placeholder-shown) ~ span:not(.box-underline),input:focus ~ span:not(.box-underline)
+        top: -1.2rem
+        font-size: 1rem
+        color: $color-green
+    // input:focus ~ span:not(.box-underline)
+    //     top: -2rem
+
+@media all and (max-width:600px)
+    form.small-container
+        width: 100%
+        padding: 2rem 5%
+        padding-right: calc( 5% + 1.5rem )
+@media all and (max-width:480px)
+    form.small-container
+        .label
+            width: 100%
+
+.label.upload-file
+    cursor: pointer
+    input[type=file]
+        cursor: pointer
+        position: relative
+        padding-top: 0.5rem
+        &::-webkit-file-upload-button
+            // visibility: hidden
+            cursor: pointer
+            background: $color-orange
+            position: absolute
+            bottom: 0.3rem
+            right: 1rem
+            border-radius: 0.5rem
+            padding: 0.25rem 0.5rem
+            transition: 0.5s
+    &:hover
+        input[type=file]
+            &::-webkit-file-upload-button
+                background: $color-green
+
+.additional-images
+    width: 100%
+    padding-left: 1rem
+    margin-bottom: 1rem
+
+    div
+        word-break: break-all
+    button
+        margin-left: 0.5rem
+    span
+        letter-spacing: 0
+        left: 0
+        display: block
+        position: relative
+        margin-bottom: 1rem
+        color: $color-green
+
+.label.textarea
+    span
+        letter-spacing: 0
+        left: 0
+        display: block
+        position: relative
+        margin-bottom: 1rem
+        color: $color-green

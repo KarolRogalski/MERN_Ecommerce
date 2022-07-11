@@ -1,8 +1,6 @@
 import axios from 'axios'
 import React, { useReducer, useState } from 'react'
 import { useEffect } from 'react'
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
 import { Helmet } from 'react-helmet-async'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -11,8 +9,7 @@ import Rating from '../components/Rating'
 import LoadingBox from '../components/LoadingBox'
 import MessageBox from '../components/MessageBox'
 import Product from '../components/Product'
-
-import LinkContainer from 'react-router-bootstrap/LinkContainer'
+import { Searchbox } from '../components/Searchbox'
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -115,7 +112,7 @@ export const SearchScreen = () => {
 
     return `/search?page=${filterPage}&query=${filterQuery}&category=${filterCategory}&price=${filterPrice}&rating=${filterRating}&order=${filterOrder}`
   }
-  const [showFilter, setShowFilter] = useState(true)
+  const [showFilter, setShowFilter] = useState(false)
   const filterToggle = () => {
     setShowFilter(!showFilter)
   }
@@ -139,13 +136,13 @@ export const SearchScreen = () => {
                   ? 'search-filter-btn-toggle'
                   : 'search-filter-btn-toggle rotate-180'
               }
-            >
-              ^
-            </button>
+            ></button>
           </div>
-
-          <h3>Department</h3>
+          <div className='search'>
+            <Searchbox />
+          </div>
           <div>
+            <h3>Department</h3>
             <ul>
               <li>
                 <Link
@@ -182,7 +179,7 @@ export const SearchScreen = () => {
                 <li key={p.value}>
                   <Link
                     to={getFilterUrl({ price: p.value, page: 1 })}
-                    className={p.value === price ? 'text-blod' : ''}
+                    className={p.value === price ? 'text-bold' : ''}
                   >
                     {p.name}
                   </Link>
@@ -197,7 +194,9 @@ export const SearchScreen = () => {
                 <li key={r.name}>
                   <Link
                     to={getFilterUrl({ rating: r.rating, page: 1 })}
-                    className={`${r.rating} === ${rating}` ? 'text-bold' : ''}
+                    className={
+                      parseInt(r.rating) === parseInt(rating) ? 'text-bold' : ''
+                    }
                   >
                     <Rating caption={' & up'} rating={r.rating}></Rating>
                   </Link>

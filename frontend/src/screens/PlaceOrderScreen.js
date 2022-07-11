@@ -1,11 +1,7 @@
 import React, { useContext, useEffect, useReducer } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { Link, useNavigate } from 'react-router-dom'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Card from 'react-bootstrap/Card'
 
-import ListGroup from 'react-bootstrap/ListGroup'
 import { toast } from 'react-toastify'
 import { getError } from '../utils'
 import { Store } from '../Store'

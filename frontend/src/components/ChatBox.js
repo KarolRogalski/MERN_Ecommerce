@@ -92,12 +92,17 @@ export const ChatBox = (props) => {
           </ul>
           <div>
             <form onSubmit={submitHandler} className='row'>
-              <input
-                value={messageBody}
-                onChange={(e) => setMessageBody(e.target.value)}
-                type='text'
-                placeholder='type message'
-              />
+              <label className='label'>
+                <input
+                  type='text'
+                  value={messageBody}
+                  required
+                  placeholder='e.g. I need help with...'
+                  onChange={(e) => setMessageBody(e.target.value)}
+                />
+                <span>message</span>
+                <span className='box-underline'></span>
+              </label>
               <button type='submit'>Send</button>
             </form>
           </div>

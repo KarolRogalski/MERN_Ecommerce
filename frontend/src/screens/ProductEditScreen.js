@@ -6,10 +6,6 @@ import { getError } from '../utils'
 import { Helmet } from 'react-helmet-async'
 import LoadingBox from '../components/LoadingBox'
 import MessageBox from '../components/MessageBox'
-import Container from 'react-bootstrap/Container'
-import ListGroup from 'react-bootstrap/ListGroup'
-import Form from 'react-bootstrap/Form'
-
 import { toast } from 'react-toastify'
 
 const reducer = (state, action) => {
@@ -150,119 +146,155 @@ export const ProductEditScreen = () => {
     }
   }
   return (
-    <Container className='small-container'>
+    <div className='small-container'>
       <Helmet>
-        <title>Product Edit ${productId}</title>
+        <title>Product Edit {productId}</title>
       </Helmet>
-      <h1 className='title'>Edit Product ${productId}</h1>
+      <h1 className='title'>Edit Product:</h1>
+      <h3>{productId}</h3>
       {loading ? (
         <LoadingBox />
       ) : error ? (
         <MessageBox variant='danger'>{error}</MessageBox>
       ) : (
-        <Form onSubmit={submitHandler}>
-          <Form.Group className='mb-3' controlId='name'>
-            <Form.Label>Name</Form.Label>
-            <Form.Control
+        <form
+          className='small-container edit-item div-bg'
+          onSubmit={submitHandler}
+        >
+          <label className='label'>
+            <input
+              type='text'
               value={name}
+              required
+              placeholder='e.g. Mexican Tarantula'
               onChange={(e) => setName(e.target.value)}
-              required
             />
-          </Form.Group>
-          <Form.Group className='mb-3' controlId='slug'>
-            <Form.Label>Slug</Form.Label>
-            <Form.Control
-              value={slug}
-              onChange={(e) => setSlug(e.target.value)}
-              required
-            />
-          </Form.Group>
-          <Form.Group className='mb-3' controlId='price'>
-            <Form.Label>Price</Form.Label>
-            <Form.Control
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-              required
-            />
-          </Form.Group>
-          <Form.Group className='mb-3' controlId='image'>
-            <Form.Label>Image</Form.Label>
-            <Form.Control
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
-              required
-            />
-          </Form.Group>
-          <Form.Group className='mb-3' controlId='imageFile'>
-            <Form.Label>Upload Image</Form.Label>
-            <Form.Control type='file' onChange={uploadFileHandler} />
-            {loadingUpload && <LoadingBox />}
-          </Form.Group>
+            <span>Name</span>
+            <span className='box-underline'></span>
+          </label>
 
-          <Form.Group className='mb-3' controlId='additionalImage'>
-            <Form.Label>Additional Images</Form.Label>
+          <label className='label'>
+            <input
+              type='text'
+              value={slug}
+              required
+              placeholder='e.g. mexican-tarantula-new'
+              onChange={(e) => setSlug(e.target.value)}
+            />
+            <span>Slug</span>
+            <span className='box-underline'></span>
+          </label>
+          <label className='label'>
+            <input
+              type='text'
+              value={price}
+              required
+              placeholder='e.g. 23'
+              onChange={(e) => setPrice(e.target.value)}
+            />
+            <span>Price</span>
+            <span className='box-underline'></span>
+          </label>
+          <label className='label'>
+            <input
+              type='text'
+              value={image}
+              required
+              placeholder='e.g. http://me.com/my-image.jpg'
+              onChange={(e) => setImage(e.target.value)}
+            />
+            <span>Image</span>
+            <span className='box-underline'></span>
+          </label>
+
+          <label className='label upload-file'>
+            <input type='file' onChange={uploadFileHandler} />
+            <span>Upoad Image</span>
+            <span className='box-underline'></span>
+            {loadingUpload && <LoadingBox />}
+          </label>
+
+          <div className='additional-images'>
+            <span>Additional Images</span>
             {images.length === 0 && <MessageBox>No image</MessageBox>}
-            <ListGroup variant='flush'>
+            <div>
               {images.map((x) => (
-                <ListGroup.Item key={x}>
-                  {x}
-                  <button variant='light' onClick={() => deleteFileHandler(x)}>
+                <p key={x}>
+                  {x}{' '}
+                  <button
+                    className='btn-icon'
+                    onClick={() => deleteFileHandler(x)}
+                  >
                     <i className='fa fa-times-circle'></i>
                   </button>
-                </ListGroup.Item>
+                </p>
               ))}
-            </ListGroup>
-          </Form.Group>
+            </div>
+          </div>
 
-          <Form.Group className='mb-3' controlId='additionalImageFile'>
-            <Form.Label>Upload Additional Images</Form.Label>
-            <Form.Control
-              type='file'
-              onChange={(e) => uploadFileHandler(e, true)}
-            />
+          <label className='label upload-file'>
+            <input type='file' onChange={(e) => uploadFileHandler(e, true)} />
+            <span>Upload Additional Images</span>
+            <span className='box-underline'></span>
             {loadingUpload && <LoadingBox />}
-          </Form.Group>
+          </label>
 
-          <Form.Group className='mb-3' controlId='category'>
-            <Form.Label>Category</Form.Label>
-            <Form.Control
+          <label className='label'>
+            <input
+              type='text'
               value={category}
+              required
+              placeholder='e.g. spiders'
               onChange={(e) => setCategory(e.target.value)}
-              required
             />
-          </Form.Group>
-          <Form.Group className='mb-3' controlId='brand'>
-            <Form.Label>Brand</Form.Label>
-            <Form.Control
+            <span>Category</span>
+            <span className='box-underline'></span>
+          </label>
+
+          <label className='label'>
+            <input
+              type='text'
               value={brand}
+              required
+              placeholder='e.g. tarantula'
               onChange={(e) => setBrand(e.target.value)}
-              required
             />
-          </Form.Group>
-          <Form.Group className='mb-3' controlId='countInStock'>
-            <Form.Label>Count In Stock</Form.Label>
-            <Form.Control
+            <span>Brand</span>
+            <span className='box-underline'></span>
+          </label>
+
+          <label className='label'>
+            <input
+              type='text'
               value={countInStock}
+              required
+              placeholder='e.g. 100'
               onChange={(e) => setCountInStock(e.target.value)}
-              required
             />
-          </Form.Group>
-          <Form.Group className='mb-3' controlId='description'>
-            <Form.Label>Description</Form.Label>
-            <Form.Control
+            <span>Count In Stock</span>
+            <span className='box-underline'></span>
+          </label>
+
+          <label className='label textarea'>
+            <span>Description</span>
+            <textarea
+              type='text'
               value={description}
-              onChange={(e) => setDescription(e.target.value)}
               required
+              placeholder='e.g. description'
+              onChange={(e) => setDescription(e.target.value)}
             />
-          </Form.Group>
-          <div className='mb-3'>
+            <span className='box-underline'></span>
+          </label>
+
+          <div className='mb-2'>
             <button disabled={loadingUpdate} type='submit'>
               Update
             </button>
             {loadingUpdate && <LoadingBox />}
           </div>
-        </Form>
+        </form>
       )}
-    </Container>
+    </div>
   )
 }

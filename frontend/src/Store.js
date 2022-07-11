@@ -17,9 +17,16 @@ const initialState = {
       ? JSON.parse(localStorage.getItem('cartItems'))
       : [],
   },
+  filerMenuIsOpen: false,
 }
 function reducer(state, action) {
   switch (action.type) {
+    case 'FILTER_MENU':
+      console.log(action.payload)
+      return {
+        ...state,
+        filerMenuIsOpen: action.payload,
+      }
     case 'CART_ADD_ITEM':
       //add to cart
       const newItem = action.payload

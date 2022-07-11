@@ -1,6 +1,4 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import Container from 'react-bootstrap/Container'
-import Form from 'react-bootstrap/Form'
 
 import { Helmet } from 'react-helmet-async'
 import Axios from 'axios'
@@ -42,36 +40,46 @@ export default function SigninScreen() {
   }, [navigate, redirect, userInfo])
 
   return (
-    <Container className='small-container'>
+    <div className='small-container'>
       <Helmet>
         <title>Sign In</title>
       </Helmet>
-      <h1 className='my-3'> Sign-In</h1>
-      <Form onSubmit={submitHandler}>
-        <Form.Group className='mb-3' controlId='email'>
-          <Form.Label>Email</Form.Label>
-          <Form.Control
+      <h1 className='title'> Sign-In</h1>
+
+      <form onSubmit={submitHandler} className='small-container div-bg'>
+        <label className='label'>
+          <input
             type='email'
+            value={email}
             required
+            placeholder='e.g. joedoe@email.com'
             onChange={(e) => setEmail(e.target.value)}
           />
-        </Form.Group>
-        <Form.Group className='mb-3' controlId='password'>
-          <Form.Label>Password</Form.Label>
-          <Form.Control
+          <span>Email</span>
+          <span className='box-underline'></span>
+        </label>
+        <label className='label'>
+          <input
             type='password'
+            value={password}
             required
+            placeholder='e.g. my_secret_password'
             onChange={(e) => setPassword(e.target.value)}
           />
-        </Form.Group>
-        <div className='mb-3'>
+          <span>Password</span>
+          <span className='box-underline'></span>
+        </label>
+
+        <div className='mb-2'>
           <button type='submit'>Sign In</button>
         </div>
-        <div className='mb-3'>
+        <div className='mb-2'>
           New customer?{' '}
-          <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
+          <Link to={`/signup?redirect=${redirect}`}>
+            <ins>Create your account</ins>
+          </Link>
         </div>
-      </Form>
-    </Container>
+      </form>
+    </div>
   )
 }

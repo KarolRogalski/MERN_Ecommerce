@@ -110,7 +110,7 @@ export default function SupportScreen() {
 
   return (
     <div className='full-container'>
-      <div className='support-users'>
+      <div className='support-users div-bg'>
         {users.filter((x) => x._id !== userInfo._id).length === 0 && (
           <MessageBox>No Online User Found</MessageBox>
         )}
@@ -138,7 +138,7 @@ export default function SupportScreen() {
             ))}
         </ul>
       </div>
-      <div className='support-messages'>
+      <div className='support-messages div-bg'>
         {!selectedUser._id ? (
           <MessageBox>Select a user to start chat</MessageBox>
         ) : (
@@ -156,12 +156,17 @@ export default function SupportScreen() {
             </ul>
 
             <form onSubmit={submitHandler} className='row'>
-              <input
-                value={messageBody}
-                onChange={(e) => setMessageBody(e.target.value)}
-                type='text'
-                placeholder='type message'
-              />
+              <label className='label'>
+                <input
+                  type='text'
+                  value={messageBody}
+                  required
+                  placeholder='e.g. How can I help you Joe Doe?'
+                  onChange={(e) => setMessageBody(e.target.value)}
+                />
+                <span>type message</span>
+                <span className='box-underline'></span>
+              </label>
               <button type='submit'>Send</button>
             </form>
           </>
