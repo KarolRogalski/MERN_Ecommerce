@@ -1,19 +1,20 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Store } from '../Store'
 import { FilterMenu } from './FilterMenu'
 import { Searchbox } from './Searchbox'
 
 export const Navbarbar = () => {
+  const navigation = useNavigate()
   const { state, dispatch: ctxDispatch } = useContext(Store)
   const { cart, userInfo, filterMenuIsOpen, mobileMenuIsOpen } = state
 
   const signoutHandler = () => {
-    ctxDispatch({ type: 'USER_SIGNOUT' })
     localStorage.removeItem('userInfo')
     localStorage.removeItem('shippingAddress')
     localStorage.removeItem('paymentMethod')
-    window.location.href = '/signin'
+    ctxDispatch({ type: 'USER_SIGNOUT' })
+    mobileMenuHideHandler()
   }
 
   const filterMenuHandler = () => {
@@ -23,6 +24,10 @@ export const Navbarbar = () => {
     }
   }
   const mobileMenuHandler = () => {
+    if (!userInfo) {
+      navigation('/signin')
+      return
+    }
     ctxDispatch({ type: 'MOBILE_MENU', payload: !mobileMenuIsOpen })
     if (filterMenuIsOpen) {
       ctxDispatch({ type: 'FILTER_MENU', payload: false })
@@ -89,11 +94,8 @@ export const Navbarbar = () => {
                   >
                     <Link to='/orderhistory'>Order{'\xa0'}History</Link>
                   </li>
-                  <li
-                    onClick={mobileMenuHideHandler}
-                    className='drop-menu-item'
-                  >
-                    <Link to='#signout' onClick={signoutHandler}>
+                  <li className='drop-menu-item'>
+                    <Link to='/signin' onClick={signoutHandler}>
                       Sign Out
                     </Link>
                   </li>
