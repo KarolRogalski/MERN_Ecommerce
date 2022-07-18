@@ -3,7 +3,6 @@ import React, { useContext, useReducer, useState } from 'react'
 import { useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
-import { toast } from 'react-toastify'
 import { getError } from '../utils'
 import Rating from '../components/Rating'
 import LoadingBox from '../components/LoadingBox'
@@ -246,7 +245,7 @@ export const SearchScreen = () => {
               {products.lenght === 0 && (
                 <MessageBox>No Products Found</MessageBox>
               )}
-              <div className='search-row'>
+              <div className='products'>
                 {products.map((product) => (
                   <Product key={product._id} product={product}></Product>
                 ))}

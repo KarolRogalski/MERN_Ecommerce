@@ -113,46 +113,10 @@ export const ProfileScreen = () => {
           <span>Confirm Pasword</span>
           <span className='box-underline'></span>
         </label>
-        <button type='submit'>Update</button>
+        <button disabled={loadingUpdate} type='submit'>
+          Update
+        </button>
       </form>
-      {/* <form onSubmit={submitHandler}>
-        <Form.Group className='mb-2' controlId='name'>
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </Form.Group>
-        <Form.Group className='mb-2' controlId='email'>
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            type='email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </Form.Group>
-        <Form.Group className='mb-2' controlId='password'>
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type='password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group className='mb-2' controlId='confirmPassword'>
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-            type='password'
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-        </Form.Group>
-        <div className='mb-2'>
-          <button type='submit'>Update</button>
-        </div>
-      </form> */}
     </div>
   )
 }

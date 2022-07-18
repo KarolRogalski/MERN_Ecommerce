@@ -4,10 +4,21 @@ import Product from '../models/productModel.js'
 import { isAuth, isAdmin } from '../utils.js'
 
 const productRouter = express.Router()
-
+const PER_PAGE = 8
 productRouter.get('/', async (req, res) => {
+  const { query } = req
+  const page = query.page || 1
+  const pageSize = query.pageSize || PER_PAGE
+  console.log(query)
   const products = await Product.find()
-  res.send(products)
+    .skip(PER_PAGE * (page - 1))
+    .limit(PER_PAGE)
+  const countProducts = await Product.find()
+  res.send({
+    products,
+    countProducts,
+    pages: Math.ceil(countProducts.length / PER_PAGE),
+  })
 })
 
 productRouter.post(

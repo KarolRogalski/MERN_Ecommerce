@@ -1,4 +1,4 @@
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import HomeScreen from './screens/HomeScreen'
@@ -34,14 +34,10 @@ function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store)
   const { userInfo } = state
 
-  const [categories, setCategories] = useState([])
-
   useEffect(() => {
     const fetchCategories = async () => {
-      console.log('cat app')
       try {
         const { data } = await axios.get(`/api/products/categories`)
-        setCategories(data)
         ctxDispatch({ type: 'SET_CATEGORIES', payload: data })
       } catch (err) {
         toast.error(getError(err))

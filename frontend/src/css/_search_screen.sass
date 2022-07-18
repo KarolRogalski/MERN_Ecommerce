@@ -3,6 +3,7 @@
     display: flex
     justify-content: space-between
     flex-wrap: wrap
+    padding: 0.5rem
     &:after
         content: ""
         flex: auto
@@ -17,9 +18,6 @@
         &:hover > i
             transition: 0.5s
             font-size: 1.1rem
-    .product-card
-        width: 30%
-        max-width: 280px
     .search
         display: none
 .search-result-row
@@ -44,7 +42,7 @@
     border: 1px solid rgba(0,0,0,.125)
     border-radius: 0.45rem
     overflow: hidden
-    height: 36rem
+    max-height: 38rem
     min-height: min-content
     transition: 1s ease
 .search-span
@@ -53,24 +51,30 @@
     &:last-child
         text-align: right
 .search-filter-hidden
-    height: 36rem
+    max-height: 38rem
 .search-row-toggle
     display: none
 .search-resoult
     width: 74%
     padding: 0 1rem 0 1rem
+    .products
+        grid-template-columns: repeat(auto-fill, 32%)
+        gap: 1%
 .rotate-180
     transform: translateY(-50%) rotate(180deg)
 
-@media all and (max-width:980px)
-    .search-row
-        .product-card
-            width: 48%
+@media all and (max-width:810px)
+    .search-resoult
+        .products
+            grid-template-columns: repeat(auto-fill, 48%)
+            gap: 2%
 @media all and (max-width:720px)
     .search-filter, .search-resoult
-        width: 90%
-        margin: 2% 5%
+        width: 100%
+        margin: 1rem 0
         padding: 0.5rem
+    .search-resoult
+        padding: 0
     .search-filter
         padding-left: 1rem
         height: min-content
@@ -101,8 +105,6 @@
             display: block
             margin: 1.5rem auto
             width: 80%
-        .product-card
-            width: 48%
         .label
             width: 100%
     .search-filter-hidden
@@ -125,10 +127,3 @@
         justify-content: center
         &::after
             display: none
-        .product-card
-            min-width: 170px
-            max-width: 200px
-@media all and (max-width:360px)
-    .search-row
-        .product-card
-            width: 220px

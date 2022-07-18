@@ -25,6 +25,9 @@ export const Navbarbar = () => {
   }
   const mobileMenuHandler = () => {
     if (!userInfo) {
+      ctxDispatch({ type: 'MOBILE_MENU', payload: false })
+      ctxDispatch({ type: 'FILTER_MENU', payload: false })
+
       navigation('/signin')
       return
     }
@@ -64,19 +67,25 @@ export const Navbarbar = () => {
               </span>
             )}
           </Link>
-          <div className='mobile-menu-btn' onClick={mobileMenuHandler}>
-            <i className='fa fa-user'></i>
-          </div>
-          <div
-            className={
-              mobileMenuIsOpen ? 'mobile-menu show-mobile-menu' : 'mobile-menu'
-            }
-          >
-            {!userInfo ? (
-              <Link className='signin' to='/signin'>
-                <i className='fa fa-user'></i>
-              </Link>
-            ) : (
+          {userInfo && (
+            <div className='mobile-menu-btn' onClick={mobileMenuHandler}>
+              <i className='fa fa-user'></i>
+            </div>
+          )}
+
+          {!userInfo ? (
+            <Link onClick={mobileMenuHandler} className='signin' to='/signin'>
+              <i className='fa fa-user'></i>
+              <ins>Sign in</ins>
+            </Link>
+          ) : (
+            <div
+              className={
+                mobileMenuIsOpen
+                  ? 'mobile-menu show-mobile-menu'
+                  : 'mobile-menu'
+              }
+            >
               <div className='menu-item'>
                 <span>{userInfo.name}</span>
 
@@ -101,45 +110,46 @@ export const Navbarbar = () => {
                   </li>
                 </ul>
               </div>
-            )}
-            {userInfo && userInfo.isAdmin && (
-              <div className='menu-item'>
-                <span>Admin</span>
-                <ul className='drop-menu'>
-                  <li
-                    onClick={mobileMenuHideHandler}
-                    className='drop-menu-item'
-                  >
-                    <Link to='/admin/dashboard'>Dashboard</Link>
-                  </li>
-                  <li
-                    onClick={mobileMenuHideHandler}
-                    className='drop-menu-item'
-                  >
-                    <Link to='/admin/products'>Products</Link>
-                  </li>
-                  <li
-                    onClick={mobileMenuHideHandler}
-                    className='drop-menu-item'
-                  >
-                    <Link to='/admin/orders'>Orders</Link>
-                  </li>
-                  <li
-                    onClick={mobileMenuHideHandler}
-                    className='drop-menu-item'
-                  >
-                    <Link to='/admin/users'>Users</Link>
-                  </li>
-                  <li
-                    onClick={mobileMenuHideHandler}
-                    className='drop-menu-item'
-                  >
-                    <Link to='/admin/support'>Support</Link>
-                  </li>
-                </ul>
-              </div>
-            )}
-          </div>
+
+              {userInfo && userInfo.isAdmin && (
+                <div className='menu-item'>
+                  <span>Admin</span>
+                  <ul className='drop-menu'>
+                    <li
+                      onClick={mobileMenuHideHandler}
+                      className='drop-menu-item'
+                    >
+                      <Link to='/admin/dashboard'>Dashboard</Link>
+                    </li>
+                    <li
+                      onClick={mobileMenuHideHandler}
+                      className='drop-menu-item'
+                    >
+                      <Link to='/admin/products'>Products</Link>
+                    </li>
+                    <li
+                      onClick={mobileMenuHideHandler}
+                      className='drop-menu-item'
+                    >
+                      <Link to='/admin/orders'>Orders</Link>
+                    </li>
+                    <li
+                      onClick={mobileMenuHideHandler}
+                      className='drop-menu-item'
+                    >
+                      <Link to='/admin/users'>Users</Link>
+                    </li>
+                    <li
+                      onClick={mobileMenuHideHandler}
+                      className='drop-menu-item'
+                    >
+                      <Link to='/admin/support'>Support</Link>
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>

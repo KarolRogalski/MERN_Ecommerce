@@ -93,39 +93,38 @@ hr {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
   row-gap: 1rem;
   margin-bottom: 1rem;
 }
 
 @media all and (max-width: 900px) {
   .products {
-    -ms-grid-columns: (31%)[auto-fill];
-        grid-template-columns: repeat(auto-fill, 31%);
+    -ms-grid-columns: (32%)[auto-fill];
+        grid-template-columns: repeat(auto-fill, 32%);
+    gap: 1%;
+    margin-bottom: 1.5rem;
   }
 }
 
-@media all and (max-width: 600px) {
+@media all and (max-width: 550px) {
   .products {
     -ms-grid-columns: (48%)[auto-fill];
         grid-template-columns: repeat(auto-fill, 48%);
     gap: 2vw;
+    margin-bottom: 1rem;
   }
 }
 
-@media all and (max-width: 400px) {
-  .products {
-    -ms-grid-columns: (90%)[auto-fill];
-        grid-template-columns: repeat(auto-fill, 90%);
-    gap: 1vw;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-  }
-  .products .product-card {
-    width: 220px;
-    -ms-grid-column-align: center;
-        justify-self: center;
-  }
+.pages-count {
+  margin-top: 1rem;
+  padding-left: 1rem;
+}
+
+.pages-count button {
+  margin: 0.5rem;
 }
 
 .footer {
@@ -475,6 +474,14 @@ a:hover {
 
 .nav-right-panel .cart, .nav-right-panel .menu-item, .nav-right-panel .signin, .nav-right-panel .mobile-menu {
   padding: 0.5rem 0;
+}
+
+.nav-right-panel .signin {
+  margin-left: 2.5rem;
+}
+
+.nav-right-panel .signin i {
+  display: none;
 }
 
 .mobile-menu {
@@ -880,6 +887,12 @@ a:hover {
   .nav-right-panel .menu-item, .nav-right-panel .mobile-menu {
     padding: 0;
   }
+  .nav-right-panel .signin i {
+    display: block;
+  }
+  .nav-right-panel .signin ins {
+    display: none;
+  }
   .mobile-menu-btn {
     text-align: center;
     width: 2rem;
@@ -1186,6 +1199,114 @@ a:hover {
   border-radius: 0.45rem;
   margin: 1.5% 1%;
   padding: 0;
+  max-width: 240px;
+  width: 100%;
+  justify-self: center;
+  opacity: 0;
+}
+
+.product-card:nth-child(1) {
+  -webkit-animation-name: card-animation;
+          animation-name: card-animation;
+  -webkit-animation-duration: 500ms;
+          animation-duration: 500ms;
+  -webkit-animation-delay: 250ms;
+          animation-delay: 250ms;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.product-card:nth-child(2) {
+  -webkit-animation-name: card-animation;
+          animation-name: card-animation;
+  -webkit-animation-duration: 500ms;
+          animation-duration: 500ms;
+  -webkit-animation-delay: 500ms;
+          animation-delay: 500ms;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.product-card:nth-child(3) {
+  -webkit-animation-name: card-animation;
+          animation-name: card-animation;
+  -webkit-animation-duration: 500ms;
+          animation-duration: 500ms;
+  -webkit-animation-delay: 750ms;
+          animation-delay: 750ms;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.product-card:nth-child(4) {
+  -webkit-animation-name: card-animation;
+          animation-name: card-animation;
+  -webkit-animation-duration: 500ms;
+          animation-duration: 500ms;
+  -webkit-animation-delay: 1000ms;
+          animation-delay: 1000ms;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.product-card:nth-child(5) {
+  -webkit-animation-name: card-animation;
+          animation-name: card-animation;
+  -webkit-animation-duration: 500ms;
+          animation-duration: 500ms;
+  -webkit-animation-delay: 1250ms;
+          animation-delay: 1250ms;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.product-card:nth-child(6) {
+  -webkit-animation-name: card-animation;
+          animation-name: card-animation;
+  -webkit-animation-duration: 500ms;
+          animation-duration: 500ms;
+  -webkit-animation-delay: 1500ms;
+          animation-delay: 1500ms;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.product-card:nth-child(7) {
+  -webkit-animation-name: card-animation;
+          animation-name: card-animation;
+  -webkit-animation-duration: 500ms;
+          animation-duration: 500ms;
+  -webkit-animation-delay: 1750ms;
+          animation-delay: 1750ms;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.product-card:nth-child(8) {
+  -webkit-animation-name: card-animation;
+          animation-name: card-animation;
+  -webkit-animation-duration: 500ms;
+          animation-duration: 500ms;
+  -webkit-animation-delay: 2000ms;
+          animation-delay: 2000ms;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
 }
 
 .product-card .img-wrap {
@@ -1267,6 +1388,32 @@ a:hover {
   }
 }
 
+@-webkit-keyframes card-animation {
+  0% {
+    opacity: 0;
+    -webkit-transform: rotateY(-90deg) translateY(30px);
+            transform: rotateY(-90deg) translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: rotateY(0deg) translateY(0px);
+            transform: rotateY(0deg) translateY(0px);
+  }
+}
+
+@keyframes card-animation {
+  0% {
+    opacity: 0;
+    -webkit-transform: rotateY(-90deg) translateY(30px);
+            transform: rotateY(-90deg) translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: rotateY(0deg) translateY(0px);
+            transform: rotateY(0deg) translateY(0px);
+  }
+}
+
 .search-row {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1276,6 +1423,7 @@ a:hover {
           justify-content: space-between;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  padding: 0.5rem;
 }
 
 .search-row:after {
@@ -1302,11 +1450,6 @@ a:hover {
   -webkit-transition: 0.5s;
   transition: 0.5s;
   font-size: 1.1rem;
-}
-
-.search-row .product-card {
-  width: 30%;
-  max-width: 280px;
 }
 
 .search-row .search {
@@ -1342,7 +1485,7 @@ a:hover {
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.45rem;
   overflow: hidden;
-  height: 36rem;
+  max-height: 38rem;
   min-height: -webkit-min-content;
   min-height: -moz-min-content;
   min-height: min-content;
@@ -1360,7 +1503,7 @@ a:hover {
 }
 
 .search-filter-hidden {
-  height: 36rem;
+  max-height: 38rem;
 }
 
 .search-row-toggle {
@@ -1372,22 +1515,33 @@ a:hover {
   padding: 0 1rem 0 1rem;
 }
 
+.search-resoult .products {
+  -ms-grid-columns: (32%)[auto-fill];
+      grid-template-columns: repeat(auto-fill, 32%);
+  gap: 1%;
+}
+
 .rotate-180 {
   -webkit-transform: translateY(-50%) rotate(180deg);
           transform: translateY(-50%) rotate(180deg);
 }
 
-@media all and (max-width: 980px) {
-  .search-row .product-card {
-    width: 48%;
+@media all and (max-width: 810px) {
+  .search-resoult .products {
+    -ms-grid-columns: (48%)[auto-fill];
+        grid-template-columns: repeat(auto-fill, 48%);
+    gap: 2%;
   }
 }
 
 @media all and (max-width: 720px) {
   .search-filter, .search-resoult {
-    width: 90%;
-    margin: 2% 5%;
+    width: 100%;
+    margin: 1rem 0;
     padding: 0.5rem;
+  }
+  .search-resoult {
+    padding: 0;
   }
   .search-filter {
     padding-left: 1rem;
@@ -1430,9 +1584,6 @@ a:hover {
     margin: 1.5rem auto;
     width: 80%;
   }
-  .search-row .product-card {
-    width: 48%;
-  }
   .search-row .label {
     width: 100%;
   }
@@ -1471,16 +1622,6 @@ a:hover {
   }
   .search-row::after {
     display: none;
-  }
-  .search-row .product-card {
-    min-width: 170px;
-    max-width: 200px;
-  }
-}
-
-@media all and (max-width: 360px) {
-  .search-row .product-card {
-    width: 220px;
   }
 }
 
@@ -2869,7 +3010,7 @@ select {
   background: rgba(33, 37, 41, 0.95);
   height: 2rem;
   border-radius: 0.25rem;
-  padding: 0.5rem;
+  padding: 0 0.5rem;
 }
 
 textarea {

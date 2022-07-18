@@ -64,24 +64,32 @@ hr
     display: grid
     grid-template-columns: repeat(auto-fill, 23%)
     justify-content: space-between
+    align-items: stretch
     row-gap: 1rem
     margin-bottom: 1rem
 @media all and (max-width:900px)
     .products
-        grid-template-columns: repeat(auto-fill, 31%)
-@media all and (max-width:600px)
+        grid-template-columns: repeat(auto-fill, 32%)
+        gap: 1%
+        margin-bottom: 1.5rem
+@media all and (max-width:550px)
     .products
         grid-template-columns: repeat(auto-fill, 48%)
         gap: 2vw
-@media all and (max-width:400px)
-    .products
-        grid-template-columns: repeat(auto-fill, 90%)
-        gap: 1vw
-        justify-content: center
-        .product-card
-            width: 220px
-            justify-self: center
-
+        margin-bottom: 1rem
+// @media all and (max-width:400px)
+//     .products
+//         grid-template-columns: repeat(auto-fill, 90%)
+//         gap: 1vw
+//         justify-content: center
+//         .product-card
+//             width: 220px
+//             justify-self: center
+.pages-count
+    margin-top: 1rem
+    padding-left: 1rem
+    button
+        margin: 0.5rem
 .footer
     margin-top: 2rem
     height: 3.5rem
